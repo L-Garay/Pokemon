@@ -16,6 +16,7 @@ export class Paths {
 export function RegisterControllers(router) {
   let controllers = fs.readdirSync(Paths.Controllers);
   controllers.forEach(loadController);
+  debugger;
   async function loadController(controllerName) {
     try {
       if (!controllerName.endsWith(".js")) return;

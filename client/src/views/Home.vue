@@ -6,6 +6,7 @@
     <div class="row middle">
       <div class="col-6 offset-3 clock-greeting">
         this is the clock and greeting
+        <p>{{ pokemon }}</p>
       </div>
     </div>
     <div class="row bottom">
@@ -20,10 +21,21 @@
 
 <script>
 // @ is an alias to /src
-
+import axios from "axios";
 export default {
   name: "Home",
-  components: {}
+  data() {
+    return {};
+  },
+  components: {},
+  mounted() {
+    this.$store.dispatch("getAll");
+  },
+  computed: {
+    pokemon() {
+      return this.$store.state.pokemon;
+    }
+  }
 };
 </script>
 

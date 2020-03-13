@@ -5,13 +5,12 @@ import { valuesService } from "../services/ValueService";
 export class ValuesController extends BaseController {
   constructor() {
     super("api/values");
-    this.router
-      .get("", this.getAll)
-      .post("", this.create);
+    this.router.get("", this.getAll).post("", this.create);
   }
-  async getAll(_, res, next) {
+  async getAll(req, res, next) {
     try {
-      return res.send(["value1", "value2"]);
+      let data = await valuesService.getAll();
+      return res.send(data);
     } catch (error) {
       next(error);
     }
