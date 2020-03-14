@@ -4,7 +4,16 @@
       {{ militaryTime }}
     </div>
     <div class="clock" v-else>{{ time }}</div>
-    <div class=""></div>
+    <div class="greeting" v-if="setName">
+      Good {{ timeOfDay }},
+      <input
+        class="nameInput"
+        type="text"
+        v-model="name"
+        v-on:keyup.enter="submit"
+      />
+    </div>
+    <div class="greeting" v-else>Good {{ timeOfDay }}, {{ name }}</div>
   </div>
 </template>
 
@@ -15,50 +24,44 @@ export default {
     return {
       time: "",
       militaryTime: "",
-      militaryTimeSelected: false
+      militaryTimeSelected: false,
+      timeOfDay: "",
+      name: "",
+      setName: true
     };
   },
   mounted() {
-    this.getMilitaryTime();
     this.getTime();
   },
   methods: {
-    getTime() {
-      var today = new Date();
-      var h = today.getHours(); // 0 - 23
-      var m = today.getMinutes(); // 0 - 59
-      var s = today.getSeconds(); // 0 - 59
-      var session = "AM";
-
-      if (h == 0) {
-        h = 12;
-      }
-
-      if (h > 12) {
-        h = h - 12;
-        session = "PM";
-      }
-
-      h = this.checkTime(h);
-      m = this.checkTime(m);
-      s = this.checkTime(s);
-
-      var time = h + ":" + m + ":" + s + " " + session;
-      this.time = time;
-      setTimeout(this.getTime, 500);
+    submit() {
+      this.setName = false;
+      let name = this.name;
+      this.$store.dispatch("setName", name);
     },
-    getMilitaryTime() {
+    getTime() {
       var today = new Date();
       var h = today.getHours();
       var m = today.getMinutes();
       var s = today.getSeconds();
-
       m = this.checkTime(m);
       s = this.checkTime(s);
-
       var time = h + ":" + m + ":" + s;
       this.militaryTime = time;
-      setTimeout(this.getMilitaryTime, 500);
+      if (this.militaryTimeSelected == false) {
+        h = this.checkTime(h);
+        var session = "AM";
+        if (h == 0) {
+          h = 12;
+        }
+        if (h > 12) {
+          h = h - 12;
+          session = "PM";
+        }
+        var time = h + ":" + m + ":" + s + " " + session;
+        this.time = time;
+      }
+      setTimeout(this.getTime, 500);
     },
     checkTime(i) {
       if (i < 10) {
