@@ -4,7 +4,9 @@
       <div class="col-3 offset-9 weather">weather will go here</div>
     </div>
     <div class="row middle">
-      <clockgreeting />
+      <div class="col-6 offset-3 clockGreeting">
+        <clock />
+      </div>
     </div>
     <div class="row bottom">
       <div class="col-3 settings-background">
@@ -22,7 +24,7 @@
 <script>
 // @ is an alias to /src
 import axios from "axios";
-import ClockGreeting from "@/components/ClockGreeting.vue";
+import Clock from "@/components/ClockGreeting.vue";
 export default {
   name: "Home",
   data() {
@@ -38,7 +40,7 @@ export default {
     }
   },
   components: {
-    ClockGreeting
+    Clock
   }
 };
 </script>

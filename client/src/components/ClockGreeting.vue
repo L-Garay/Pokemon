@@ -1,18 +1,16 @@
 <template>
-  <div class="CG containter">
-    <div class="row">
-      <div class="col-6 offest-3 clock" v-if="militaryTimeSelected">
-        {{ militaryTime }}
-      </div>
-      <div class="col-6 offest-3 clock" v-else>{{ time }}</div>
-      <div class="col-6 offset-3"></div>
+  <div>
+    <div class="clock" v-if="militaryTimeSelected">
+      {{ militaryTime }}
     </div>
+    <div class="clock" v-else>{{ time }}</div>
+    <div class=""></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ClockGreeting",
+  name: "Clock",
   data() {
     return {
       time: "",
@@ -20,8 +18,12 @@ export default {
       militaryTimeSelected: false
     };
   },
-  mounted: {
-    time() {
+  mounted() {
+    this.getMilitaryTime();
+    this.getTime();
+  },
+  methods: {
+    getTime() {
       var today = new Date();
       var h = today.getHours(); // 0 - 23
       var m = today.getMinutes(); // 0 - 59
@@ -41,26 +43,23 @@ export default {
       m = this.checkTime(m);
       s = this.checkTime(s);
 
-      this.time = h + ":" + m + ":" + s + " " + session;
+      var time = h + ":" + m + ":" + s + " " + session;
+      this.time = time;
+      setTimeout(this.getTime, 500);
     },
-    militaryTime() {
+    getMilitaryTime() {
       var today = new Date();
       var h = today.getHours();
       var m = today.getMinutes();
       var s = today.getSeconds();
-      var session = "PM";
-
-      if (h > 12) {
-        session = "PM";
-      }
 
       m = this.checkTime(m);
       s = this.checkTime(s);
 
-      this.militaryTime = h + ":" + m + ":" + s;
-    }
-  },
-  methods: {
+      var time = h + ":" + m + ":" + s;
+      this.militaryTime = time;
+      setTimeout(this.getMilitaryTime, 500);
+    },
     checkTime(i) {
       if (i < 10) {
         i = "0" + i;
