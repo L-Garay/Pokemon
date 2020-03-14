@@ -25,13 +25,14 @@ export default {
       time: "",
       militaryTime: "",
       militaryTimeSelected: false,
-      timeOfDay: "",
+      timeOfDay: "evening",
       name: "",
       setName: true
     };
   },
   mounted() {
     this.getTime();
+    this.getTimeOfDay();
   },
   methods: {
     submit() {
@@ -40,17 +41,17 @@ export default {
       this.$store.dispatch("setName", name);
     },
     getTime() {
-      var today = new Date();
-      var h = today.getHours();
-      var m = today.getMinutes();
-      var s = today.getSeconds();
+      let today = new Date();
+      let h = today.getHours();
+      let m = today.getMinutes();
+      let s = today.getSeconds();
       m = this.checkTime(m);
       s = this.checkTime(s);
-      var time = h + ":" + m + ":" + s;
+      let time = h + ":" + m + ":" + s;
       this.militaryTime = time;
       if (this.militaryTimeSelected == false) {
         h = this.checkTime(h);
-        var session = "AM";
+        let session = "AM";
         if (h == 0) {
           h = 12;
         }
@@ -58,7 +59,7 @@ export default {
           h = h - 12;
           session = "PM";
         }
-        var time = h + ":" + m + ":" + s + " " + session;
+        let time = h + ":" + m + ":" + s + " " + session;
         this.time = time;
       }
       setTimeout(this.getTime, 500);
@@ -68,6 +69,15 @@ export default {
         i = "0" + i;
       } // add zero in front of numbers < 10
       return i;
+    },
+    getTimeOfDay() {
+      let h = new Date().getHours(); // 0 - 23
+      if (h < 12) {
+        this.timeOfDay = "morning";
+      } else if (h > 12 && h < 17) {
+        this.timeOfDay = "afternoon";
+      }
+      setTimeout(this.getTimeOfDay, 6000); //every minute (I don't know how this will effect app speed)
     }
   }
 };
