@@ -22,6 +22,7 @@ export default new Vuex.Store({
   actions: {
     async getAll({ commit, dispatch }) {
       let res = await api.get("values");
+      debugger;
       commit("setPokemon", res.data);
     }
   },
