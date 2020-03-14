@@ -6,12 +6,7 @@
     <div class="clock" v-else>{{ time }}</div>
     <div class="greeting" v-if="setName">
       Good {{ timeOfDay }},
-      <input
-        class="nameInput"
-        type="text"
-        v-model="name"
-        v-on:keyup.enter="submit"
-      />
+      <input type="text" v-model="name" v-on:keyup.enter="submit" />
     </div>
     <div class="greeting" v-else>Good {{ timeOfDay }}, {{ name }}</div>
   </div>
@@ -83,4 +78,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+input {
+  border: none;
+  border-bottom: 1pt solid black;
+  width: 100px;
+  text-align: center;
+}
+input:focus {
+  outline: none;
+}
+</style>
