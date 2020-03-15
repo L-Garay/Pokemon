@@ -42,10 +42,10 @@ export default {
       let today = new Date();
       let h = today.getHours();
       let m = today.getMinutes();
-      let s = today.getSeconds();
+
       m = this.checkTime(m);
-      s = this.checkTime(s);
-      let time = h + ":" + m + ":" + s;
+
+      let time = h + ":" + m;
       this.militaryTime = time;
       if (this.militaryTimeSelected == false) {
         h = this.checkTime(h);
@@ -57,7 +57,7 @@ export default {
           h = h - 12;
           session = "PM";
         }
-        let time = h + ":" + m + ":" + s + " " + session;
+        let time = h + ":" + m + " " + session;
         this.time = time;
       }
       setTimeout(this.getTime, 500);
@@ -87,10 +87,16 @@ export default {
 </script>
 
 <style scoped>
+.clock {
+  font-size: 10rem;
+}
+.greeting {
+  font-size: 3rem;
+}
 input {
   border: none;
   border-bottom: 1pt solid black;
-  width: 100px;
+  /* max-width: 500px; */
   text-align: center;
 }
 input:focus {
