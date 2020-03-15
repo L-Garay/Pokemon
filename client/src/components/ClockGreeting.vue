@@ -6,9 +6,12 @@
     <div class="clock" v-else>{{ time }}</div>
     <div class="greeting" v-if="setName">
       Good {{ timeOfDay }},
-      <input type="text" v-model="name" v-on:keyup.enter="submit" />
+      <input ref="input" type="text" v-model="name" v-on:keyup.enter="submit" />
     </div>
-    <div class="greeting" v-else>Good {{ timeOfDay }}, {{ name }}</div>
+    <div class="greeting" v-else>
+      Good {{ timeOfDay }}, {{ name }}
+      <i class="fas fa-pencil-alt" @click="editName"></i>
+    </div>
   </div>
 </template>
 
@@ -73,6 +76,12 @@ export default {
         this.timeOfDay = "afternoon";
       }
       setTimeout(this.getTimeOfDay, 6000); //every minute (I don't know how this will effect app speed)
+    },
+    editName() {
+      this.setName = true;
+      this.name = "";
+      debugger;
+      this.$refs.input.focus();
     }
   }
 };
@@ -87,5 +96,13 @@ input {
 }
 input:focus {
   outline: none;
+}
+i {
+  color: green;
+  opacity: 0.1;
+}
+i:hover {
+  cursor: pointer;
+  opacity: 1;
 }
 </style>
