@@ -6,7 +6,7 @@
     <div class="clock" v-else>{{ time }}</div>
     <div class="greeting" v-if="setName">
       Good {{ timeOfDay }},
-      <input ref="input" type="text" v-model="name" v-on:keyup.enter="submit" />
+      <input ref="focus" type="text" v-model="name" v-on:keyup.enter="submit" />
     </div>
     <div class="greeting" v-else>
       Good {{ timeOfDay }}, {{ name }}
@@ -80,8 +80,7 @@ export default {
     editName() {
       this.setName = true;
       this.name = "";
-      debugger;
-      this.$refs.input.focus();
+      this.$nextTick(() => this.$refs.focus.focus());
     }
   }
 };
