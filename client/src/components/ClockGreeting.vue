@@ -6,7 +6,13 @@
     <div class="clock" v-else>{{ time }}</div>
     <div class="greeting" v-if="setName">
       Good {{ timeOfDay }},
-      <input ref="focus" type="text" v-model="name" v-on:keyup.enter="submit" />
+      <input
+        ref="focus"
+        type="text"
+        v-model="name"
+        v-on:keyup.enter="submit"
+        v-autowidth="{ maxWidth: '550px', minWidth: '100px', comfortZone: 30 }"
+      />
     </div>
     <div class="greeting" v-else>
       Good {{ timeOfDay }}, {{ name }}
@@ -16,6 +22,9 @@
 </template>
 
 <script>
+import VueInputAutoWidth from "vue-input-autowidth";
+import Vue from "vue";
+Vue.use(VueInputAutoWidth);
 export default {
   name: "Clock",
   data() {
