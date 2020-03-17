@@ -10,7 +10,7 @@ export class ValuesController extends BaseController {
   async getAll(req, res, next) {
     try {
       let data = await valuesService.getAll();
-      return res.send(data);
+      return res.send(data.data);
     } catch (error) {
       next(error);
     }
