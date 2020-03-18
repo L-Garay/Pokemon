@@ -46,7 +46,7 @@ export default {
   methods: {
     submit() {
       this.userPreference.setName = false;
-      this.$store.dispatch("setName", this.userPreference.name);
+      this.$store.dispatch("setUser", this.userPreference);
     },
     getTime() {
       let today = new Date();

@@ -13,25 +13,25 @@ let api = axios.create({ baseURL: base + "api/" });
 export default new Vuex.Store({
   state: {
     pokemon: [],
-    name: ""
+    userPreferences: {}
   },
   mutations: {
     setPokemon(state, pokemon) {
       state.pokemon = pokemon;
     },
-    setName(state, name) {
-      state.name = name;
+    setUser(state, user) {
+      state.userPreferences = user;
     }
   },
   actions: {
     async getAll({ commit, dispatch }) {
       let res = await api.get("values");
-      debugger;
       commit("setPokemon", res.data);
     },
-    async setName({ commit, dispatch }, name) {
-      let res = await api.post("users", name);
-      commit("setName", res.data);
+    async setUser({ commit, dispatch }, user) {
+      debugger;
+      let res = await api.post("users", user);
+      commit("setUser", res.data);
     }
   },
   modules: {}
