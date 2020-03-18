@@ -2,6 +2,7 @@ import ValueSchema from "../models/Value";
 import mongoose from "mongoose";
 import fetch from "node-fetch";
 import Unsplash, { toJson } from "unsplash-js";
+global.fetch = fetch;
 
 let unsplashKey = process.env.API_KEY;
 
@@ -9,24 +10,13 @@ let unsplashApi =
   "https://api.unsplash.com/photos/random?query=nature&client_id=" +
   unsplashKey;
 
-const unsplash = new Unsplash({
-  accessKey: unsplashKey
-});
-global.fetch = fetch;
+// NOTE Only needed if first getPhoto() method is used
+// const unsplash = new Unsplash({
+//   accessKey: unsplashKey
+// });
 
-// (function() {
-//   if (typeof globalThis === "object") return;
-//   Object.defineProperty(Object.prototype, "__magic__", {
-//     get: function() {
-//       return this;
-//     },
-//     configurable: true
-//   });
-//   __magic__.globalThis = __magic__;
-//   delete Object.prototype.__magic__;
-// })();
-// console.log(globalThis);
 class UnsplashMethods {
+  // NOTE A different method, instead of .then() change to await
   // async getPhoto() {
   //   let data = await unsplash.photos
   //     .getRandomPhoto({ query: "nature" })
