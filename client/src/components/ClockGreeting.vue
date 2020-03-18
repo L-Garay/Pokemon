@@ -104,7 +104,7 @@ export default {
     editName() {
       this.userPreferences.setName = true;
       this.userPreferences.name = "";
-      // this.$nextTick(() => this.$refs.focus.focus());
+      this.$nextTick(() => this.$refs.focus.focus());
     }
   }
 };
