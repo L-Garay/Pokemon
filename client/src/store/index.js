@@ -29,8 +29,11 @@ export default new Vuex.Store({
       commit("setPokemon", res.data);
     },
     async setUser({ commit, dispatch }, user) {
-      debugger;
       let res = await api.post("users", user);
+      dispatch("getUser");
+    },
+    async getUser({ commit, dispatch }) {
+      let res = await api.get("users");
       commit("setUser", res.data);
     }
   },

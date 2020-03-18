@@ -5,8 +5,10 @@ import axios from "axios";
 
 class UserService {
   async create(body) {
-    let user = await dbContext.User.create(body);
-    return user;
+    return await dbContext.User.create(body);
+  }
+  async get() {
+    return await dbContext.User.find({});
   }
   async find(query = {}) {
     let values = await dbContext.Values.find(query);

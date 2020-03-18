@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="clock" v-if="userPreference.militaryTimeSelected">
+    <div class="clock" v-if="User.militaryTimeSelected">
       {{ militaryTime }}
     </div>
     <div class="clock" v-else>{{ time }}</div>
-    <div class="greeting" v-if="userPreference.setName">
+    <div class="greeting" v-if="User.setName">
       Good {{ timeOfDay }},
       <input
         ref="focus"
@@ -15,7 +15,7 @@
       />
     </div>
     <div class="greeting" v-else>
-      Good {{ timeOfDay }}, {{ userPreference.name }}
+      Good {{ timeOfDay }}, {{ User.name }}
       <i class="fas fa-pencil-alt" @click="editName"></i>
     </div>
   </div>
@@ -42,6 +42,12 @@ export default {
   mounted() {
     this.getTime();
     this.getTimeOfDay();
+    this.$store.dispatch("getUser");
+  },
+  computed: {
+    User() {
+      return this.$store.state.userPreferences;
+    }
   },
   methods: {
     submit() {
