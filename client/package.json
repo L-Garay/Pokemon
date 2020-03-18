@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "minimist": "^1.2.5",
     "node-fetch": "^2.6.0",
     "unsplash-js": "^6.0.0",
     "vue": "^2.6.11",
