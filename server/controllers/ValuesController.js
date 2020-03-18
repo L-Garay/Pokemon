@@ -19,7 +19,12 @@ export class ValuesController extends BaseController {
     }
   }
   async getPhoto(req, res, next) {
-    valuesService.getPhoto();
+    try {
+      let data = await valuesService.getPhoto();
+      return res.send(data);
+    } catch (error) {
+      next(error);
+    }
   }
   async create(req, res, next) {
     try {

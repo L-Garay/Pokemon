@@ -24,7 +24,7 @@ class ValuesService {
     return await pokeAPI.get("pokemon?limit=20");
   }
   async getPhoto() {
-    unsplashMethods.getPhoto();
+    return await unsplashMethods.getPhoto();
   }
 }
 

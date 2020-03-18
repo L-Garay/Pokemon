@@ -17,7 +17,8 @@ export default new Vuex.Store({
       name: "",
       militaryTimeSelected: false,
       setName: true
-    }
+    },
+    photo: null
   },
   mutations: {
     setPokemon(state, pokemon) {
@@ -25,7 +26,10 @@ export default new Vuex.Store({
     },
     setUser(state, user) {
       state.userPreferences = user;
-      console.log(state.userPreferences);
+    },
+    setPhoto(state, photo) {
+      console.log("this is the photo", photo);
+      state.photo = photo;
     }
   },
   actions: {
@@ -34,7 +38,9 @@ export default new Vuex.Store({
       commit("setPokemon", res.data);
     },
     async getPhoto({ commit, dispatch }) {
-      api.get("values/photo");
+      let res = api.get("values/photo");
+      commit("setPhoto", res);
+      console.log("PHOTO", res);
     },
     async setUser({ commit, dispatch }, user) {
       await api.post("users", user);

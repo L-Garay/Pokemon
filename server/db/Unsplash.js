@@ -12,6 +12,7 @@ let unsplashApi =
 const unsplash = new Unsplash({
   accessKey: unsplashKey
 });
+global.fetch = fetch;
 
 // (function() {
 //   if (typeof globalThis === "object") return;
@@ -26,16 +27,17 @@ const unsplash = new Unsplash({
 // })();
 // console.log(globalThis);
 class UnsplashMethods {
-  getPhoto() {
-    unsplash.photos
-      .getRandomPhoto({ query: "nature" })
-      .then(toJson)
-      .then(json => console.log(json));
+  async getPhoto() {
+    let data = await unsplash.photos.getRandomPhoto({ query: "nature" });
+    let formatted = data.json();
+    console.log(formatted);
+    return formatted;
   }
-  // getPhoto() {
-  //   fetch(unsplashApi)
-  //     .then(res => res.json())
-  //     .then(json => console.log(json));
+  // async getPhoto() {
+  //   let data = await fetch(unsplashApi);
+  //   console.log(data);
+  //   return data.body;
+  //   // let formatted = data.json();
   // }
 }
 
