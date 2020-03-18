@@ -32,6 +32,7 @@ export default {
       time: "",
       militaryTime: "",
       timeOfDay: "evening",
+      // NOTE Don't forget to add the option to set time preference!!!
       userPreferences: {
         name: "",
         militaryTimeSelected: false,
@@ -112,7 +113,7 @@ export default {
 
 <style scoped>
 .clock {
-  font-size: 10rem;
+  font-size: 8rem;
 }
 .greeting {
   font-size: 3rem;
