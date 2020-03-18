@@ -1,21 +1,21 @@
 <template>
   <div>
-    <div class="clock" v-if="militaryTimeSelected">
+    <div class="clock" v-if="userPreference.militaryTimeSelected">
       {{ militaryTime }}
     </div>
     <div class="clock" v-else>{{ time }}</div>
-    <div class="greeting" v-if="setName">
+    <div class="greeting" v-if="userPreference.setName">
       Good {{ timeOfDay }},
       <input
         ref="focus"
         type="text"
-        v-model="name"
+        v-model="userPreference.name"
         v-on:keyup.enter="submit"
         v-autowidth="{ maxWidth: '550px', minWidth: '100px', comfortZone: 30 }"
       />
     </div>
     <div class="greeting" v-else>
-      Good {{ timeOfDay }}, {{ name }}
+      Good {{ timeOfDay }}, {{ userPreference.name }}
       <i class="fas fa-pencil-alt" @click="editName"></i>
     </div>
   </div>
@@ -31,10 +31,12 @@ export default {
     return {
       time: "",
       militaryTime: "",
-      militaryTimeSelected: false,
       timeOfDay: "evening",
-      name: "",
-      setName: true
+      userPreference: {
+        name: "",
+        militaryTimeSelected: false,
+        setName: true
+      }
     };
   },
   mounted() {
@@ -43,9 +45,8 @@ export default {
   },
   methods: {
     submit() {
-      this.setName = false;
-      let name = this.name;
-      this.$store.dispatch("setName", name);
+      this.userPreference.setName = false;
+      this.$store.dispatch("setName", this.userPreference.name);
     },
     getTime() {
       let today = new Date();
@@ -56,7 +57,7 @@ export default {
 
       let time = h + ":" + m;
       this.militaryTime = time;
-      if (this.militaryTimeSelected == false) {
+      if (this.userPreference.militaryTimeSelected == false) {
         h = this.checkTime(h);
         let session = "AM";
         if (h == 0) {
@@ -87,8 +88,8 @@ export default {
       setTimeout(this.getTimeOfDay, 6000); //every minute (I don't know how this will effect app speed)
     },
     editName() {
-      this.setName = true;
-      this.name = "";
+      this.userPreference.setName = true;
+      this.userPreference.name = "";
       this.$nextTick(() => this.$refs.focus.focus());
     }
   }
