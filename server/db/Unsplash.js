@@ -27,18 +27,21 @@ global.fetch = fetch;
 // })();
 // console.log(globalThis);
 class UnsplashMethods {
-  async getPhoto() {
-    let data = await unsplash.photos.getRandomPhoto({ query: "nature" });
-    let formatted = data.json();
-    console.log(formatted);
-    return formatted;
-  }
   // async getPhoto() {
-  //   let data = await fetch(unsplashApi);
-  //   console.log(data);
-  //   return data.body;
-  //   // let formatted = data.json();
+  //   let data = await unsplash.photos
+  //     .getRandomPhoto({ query: "nature" })
+  //     .then(res => res.json());
+  //   return data;
   // }
+  async getPhoto() {
+    try {
+      let data = await fetch(unsplashApi);
+      let formatted = await data.json();
+      return formatted;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export const unsplashMethods = new UnsplashMethods();

@@ -28,7 +28,6 @@ export default new Vuex.Store({
       state.userPreferences = user;
     },
     setPhoto(state, photo) {
-      console.log("this is the photo", photo);
       state.photo = photo;
     }
   },
@@ -38,9 +37,9 @@ export default new Vuex.Store({
       commit("setPokemon", res.data);
     },
     async getPhoto({ commit, dispatch }) {
-      let res = api.get("values/photo");
-      commit("setPhoto", res);
-      console.log("PHOTO", res);
+      let res = await api.get("values/photo");
+      commit("setPhoto", res.data);
+      console.log("PHOTO", res.data);
     },
     async setUser({ commit, dispatch }, user) {
       await api.post("users", user);
