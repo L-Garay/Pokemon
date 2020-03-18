@@ -33,6 +33,7 @@ export default {
   components: {},
   mounted() {
     this.$store.dispatch("getAll");
+    this.$store.dispatch("getPhoto");
   },
   computed: {
     pokemon() {

@@ -5,7 +5,10 @@ import { valuesService } from "../services/ValueService";
 export class ValuesController extends BaseController {
   constructor() {
     super("api/values");
-    this.router.get("", this.getAll).post("", this.create);
+    this.router
+      .get("", this.getAll)
+      .get("/photo", this.getPhoto)
+      .post("", this.create);
   }
   async getAll(req, res, next) {
     try {
@@ -14,6 +17,9 @@ export class ValuesController extends BaseController {
     } catch (error) {
       next(error);
     }
+  }
+  async getPhoto(req, res, next) {
+    valuesService.getPhoto();
   }
   async create(req, res, next) {
     try {

@@ -1,4 +1,5 @@
 import { dbContext } from "../db/DbContext";
+import { unsplashMethods } from "../db/Unsplash";
 import { BadRequest } from "../utils/Errors";
 // @ts-ignore
 import axios from "axios";
@@ -21,6 +22,9 @@ class ValuesService {
   }
   async getAll() {
     return await pokeAPI.get("pokemon?limit=20");
+  }
+  async getPhoto() {
+    unsplashMethods.getPhoto();
   }
 }
 
