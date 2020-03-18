@@ -5,19 +5,13 @@ import { userService } from "../services/UserService";
 export class UsersController extends BaseController {
   constructor() {
     super("api/users");
-    this.router.get("", this.getAll).post("", this.create);
+    this.router.post("", this.create);
   }
-  async getAll(req, res, next) {
-    try {
-      let data = await userService.getAll();
-      return res.send(data.data);
-    } catch (error) {
-      next(error);
-    }
-  }
+
   async create(req, res, next) {
     try {
-      res.send(req.body);
+      let data = await userService.create(req.body);
+      return res.status(200).send(data);
     } catch (error) {
       next(error);
     }

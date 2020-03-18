@@ -3,11 +3,11 @@ import { BadRequest } from "../utils/Errors";
 // @ts-ignore
 import axios from "axios";
 
-let pokeAPI = axios.create({
-  baseURL: "https://pokeapi.co/api/v2/"
-});
-
 class UserService {
+  async create(body) {
+    let user = await dbContext.User.create(body);
+    return user;
+  }
   async find(query = {}) {
     let values = await dbContext.Values.find(query);
     return values;
@@ -18,9 +18,6 @@ class UserService {
       throw new BadRequest("Invalid Id");
     }
     return value;
-  }
-  async getAll() {
-    return await pokeAPI.get("pokemon?limit=20");
   }
 }
 
