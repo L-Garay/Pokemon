@@ -47,7 +47,6 @@ export default new Vuex.Store({
       commit("setPhoto", res.data);
     },
     async savePhoto({ commit, dispatch, state }, photo) {
-      debugger;
       let combo = {
         old: state.photo,
         updated: photo

@@ -15,7 +15,9 @@
     <div class="row bottom">
       <div class="col-3 settings-background">
         this is where the settings will go, and bg-img seetings
-        <button @click="getPhoto">Get photo</button>
+        <button
+          @click="getNewPhoto"
+        >Get photo</button>
         <button @click="savePhoto">Save photo</button>
       </div>
       <div class="col-6 quote">this is where the quote will go</div>
@@ -42,9 +44,9 @@ export default {
     }
   },
   methods: {
-    // getPhoto() {
-    //   this.$store.dispatch("getPhoto");
-    // },
+    getNewPhoto() {
+      this.$store.dispatch("getPhoto");
+    },
     savePhoto() {
       let savedPhoto = {
         id: this.$store.state.photo.id,
@@ -56,7 +58,7 @@ export default {
         userName: this.$store.state.photo.user.name,
         unsplashLink: this.$store.state.photo.links.html
       };
-      this.$store.dispatch("savePhoto", this.combinedPhoto);
+      this.$store.dispatch("savePhoto", savedPhoto);
     }
   },
   components: {
