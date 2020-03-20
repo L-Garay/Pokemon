@@ -10,6 +10,7 @@ const Photo = new Schema(
     regularUrl: { type: String, required: true },
     downloadLocation: { type: String, required: true },
     userName: { type: String, required: true },
+    name: { type: String, required: true },
     unsplashLink: { type: String, required: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
