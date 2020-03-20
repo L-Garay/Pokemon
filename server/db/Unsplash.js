@@ -2,6 +2,7 @@ import ValueSchema from "../models/Value";
 import mongoose from "mongoose";
 import fetch from "node-fetch";
 import Unsplash, { toJson } from "unsplash-js";
+// @ts-ignore
 global.fetch = fetch;
 
 let unsplashKey = process.env.API_KEY;

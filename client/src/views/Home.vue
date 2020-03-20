@@ -1,5 +1,5 @@
 <template>
-  <div class="home container">
+  <div class="container" id="home" :style="{'backgroundImage': 'url(photo.urls.full)'}">
     <div class="row top">
       <div class="col-3 offset-9 weather">weather will go here</div>
     </div>
@@ -9,7 +9,10 @@
       </div>
     </div>
     <div class="row bottom">
-      <div class="col-3 settings-background">this is where the settings will go, and bg-img seetings</div>
+      <div class="col-3 settings-background">
+        this is where the settings will go, and bg-img seetings
+        <button @click="getPhoto">Get photo</button>
+      </div>
       <div class="col-6 quote">this is where the quote will go</div>
       <div class="col-3 todo">this is where the todo will go</div>
     </div>
@@ -26,9 +29,18 @@ export default {
   },
   components: {},
   mounted() {
-    this.$store.dispatch("getPhoto");
+    // this.$store.dispatch("getPhoto");
   },
-  computed: {},
+  computed: {
+    photo() {
+      return this.$store.state.photo;
+    }
+  },
+  methods: {
+    getPhoto() {
+      this.$store.dispatch("getPhoto");
+    }
+  },
   components: {
     Clock
   }
@@ -36,7 +48,7 @@ export default {
 </script>
 
 <style scoped>
-.home {
+#home {
   max-height: 100vh;
   max-width: 100vw;
 }
