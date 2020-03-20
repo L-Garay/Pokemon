@@ -17,7 +17,8 @@ export default new Vuex.Store({
       militaryTimeSelected: false,
       setName: true
     },
-    photo: null
+    photo: null,
+    savedPhotos: []
   },
   mutations: {
     setUser(state, user) {
@@ -28,11 +29,6 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async getPhoto({ commit, dispatch }) {
-      let res = await api.get("photos");
-      commit("setPhoto", res.data);
-      console.log("PHOTO", res.data);
-    },
     async setUser({ commit, dispatch }, user) {
       await api.post("users", user);
       dispatch("getUser");
@@ -41,6 +37,19 @@ export default new Vuex.Store({
       let res = await api.get("users");
       commit("setUser", res.data);
       return res.data;
+    },
+    async getPhoto({ commit, dispatch }) {
+      let res = await api.get("photos");
+      commit("setPhoto", res.data);
+      console.log("PHOTO", res.data);
+    },
+    async savePhoto({ commit, dispatch }, photo) {
+      await api.post("photos", photo);
+      dispatch("getSavedPhotos");
+    },
+    async getSavedPhotos({ commit, dispatch }) {
+      let res = await api.get("photos");
+      commit("setSavedPhotos", res.data);
     }
   },
   modules: {}
