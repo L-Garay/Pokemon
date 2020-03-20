@@ -11,7 +11,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  max-height: 100vh;
-  max-width: 100vw;
+  height: 100vh;
+  width: 100vw;
 }
 </style>

@@ -1,5 +1,9 @@
 <template>
-  <div class="container" id="home" :style="{'backgroundImage': 'url(photo.urls.full)'}">
+  <div
+    class="container-fluid"
+    id="home"
+    :style="{ 'background-image': 'url(' + photo.urls.regular + ')'}"
+  >
     <div class="row top">
       <div class="col-3 offset-9 weather">weather will go here</div>
     </div>
@@ -49,7 +53,10 @@ export default {
 
 <style scoped>
 #home {
-  max-height: 100vh;
-  max-width: 100vw;
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
+  background-repeat: none;
 }
 </style>
