@@ -10,8 +10,8 @@ class PhotoService {
     return await dbContext.Photo.find(p => (p = {}));
   }
   async savePhoto(body) {
-    await unsplashMethods.savePhoto(body);
-    return await dbContext.Photo.create(body);
+    await unsplashMethods.savePhoto(body.old);
+    return await dbContext.Photo.create(body.updated);
   }
 }
 

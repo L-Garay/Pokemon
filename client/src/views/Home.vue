@@ -56,7 +56,7 @@ export default {
         userName: this.$store.state.photo.user.name,
         unsplashLink: this.$store.state.photo.links.html
       };
-      this.$store.dispatch("savePhoto", savedPhoto);
+      this.$store.dispatch("savePhoto", this.combinedPhoto);
     }
   },
   components: {
