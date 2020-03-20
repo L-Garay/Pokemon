@@ -26,6 +26,10 @@ export default new Vuex.Store({
     },
     setPhoto(state, photo) {
       state.photo = photo;
+      console.log("state.photo", state.photo);
+    },
+    setSavedPhotos(state, photos) {
+      state.savedPhotos = photos;
     }
   },
   actions: {
@@ -41,14 +45,13 @@ export default new Vuex.Store({
     async getPhoto({ commit, dispatch }) {
       let res = await api.get("photos");
       commit("setPhoto", res.data);
-      console.log("PHOTO", res.data);
     },
     async savePhoto({ commit, dispatch }, photo) {
       await api.post("photos", photo);
       dispatch("getSavedPhotos");
     },
     async getSavedPhotos({ commit, dispatch }) {
-      let res = await api.get("photos");
+      let res = await api.get("photos/all");
       commit("setSavedPhotos", res.data);
     }
   },

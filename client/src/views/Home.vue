@@ -30,18 +30,7 @@ import Clock from "@/components/ClockGreeting.vue";
 export default {
   name: "Home",
   data() {
-    return {
-      image: {
-        id: "",
-        width: 0,
-        height: 0,
-        fullUrl: "",
-        regularUrl: "",
-        downloadLocation: "",
-        userName: "",
-        unsplashLink: ""
-      }
-    };
+    return {};
   },
   components: {},
   mounted() {
@@ -49,14 +38,6 @@ export default {
   },
   computed: {
     photo() {
-      this.image.id = this.$store.state.photo.id;
-      this.image.width = this.$store.state.photo.width;
-      this.image.height = this.$store.state.photo.height;
-      this.image.fullUrl = this.$store.state.photo.urls.full;
-      this.image.regularUrl = this.$store.state.photo.urls.regular;
-      this.image.downloadLocation = this.$store.state.photo.links.download_location;
-      this.image.userName = this.$store.state.photo.user.name;
-      this.image.unsplashLink = this.$store.state.photo.links.html;
       return this.$store.state.photo;
     }
   },
@@ -65,8 +46,17 @@ export default {
     //   this.$store.dispatch("getPhoto");
     // },
     savePhoto() {
-      let savedPhoto = { ...this.image };
-      this.$store.dispatch("savePhoto", this.image);
+      let savedPhoto = {
+        id: this.$store.state.photo.id,
+        width: this.$store.state.photo.width,
+        height: this.$store.state.photo.height,
+        fullUrl: this.$store.state.photo.urls.full,
+        regularUrl: this.$store.state.photo.urls.regular,
+        downloadLocation: this.$store.state.photo.links.download_location,
+        userName: this.$store.state.photo.user.name,
+        unsplashLink: this.$store.state.photo.links.html
+      };
+      this.$store.dispatch("savePhoto", savedPhoto);
     }
   },
   components: {

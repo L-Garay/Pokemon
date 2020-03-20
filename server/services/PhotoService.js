@@ -6,9 +6,12 @@ class PhotoService {
   async getPhoto() {
     return await unsplashMethods.getPhoto();
   }
+  async getAllPhotos() {
+    return await dbContext.Photo.find(p => (p = {}));
+  }
   async savePhoto(body) {
     await unsplashMethods.savePhoto(body);
-    // NOTE Don't forget to save it to the database
+    return await dbContext.Photo.create(body);
   }
 }
 

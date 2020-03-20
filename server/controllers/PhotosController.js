@@ -16,6 +16,14 @@ export class PhotosController extends BaseController {
       next(error);
     }
   }
+  async getAllPhotos(req, res, next) {
+    try {
+      let data = await photoService.getAllPhotos();
+      return res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
   async savePhoto(req, res, next) {
     try {
       await photoService.savePhoto(req.body);

@@ -14,17 +14,17 @@ class UserService {
   async get() {
     return await dbContext.User.findOne(u => (u = {}));
   }
-  async find(query = {}) {
-    let values = await dbContext.Values.find(query);
-    return values;
-  }
-  async findById(id) {
-    let value = await dbContext.Values.findById(id);
-    if (!value) {
-      throw new BadRequest("Invalid Id");
-    }
-    return value;
-  }
+  // async find(query = {}) {
+  //   let values = await dbContext.Values.find(query);
+  //   return values;
+  // }
+  // async findById(id) {
+  //   let value = await dbContext.Values.findById(id);
+  //   if (!value) {
+  //     throw new BadRequest("Invalid Id");
+  //   }
+  //   return value;
+  // }
 }
 
 export const userService = new UserService();
