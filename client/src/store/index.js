@@ -30,6 +30,7 @@ export default new Vuex.Store({
     },
     setSavedPhotos(state, photos) {
       state.savedPhotos = photos;
+      console.log(state.savedPhotos);
     }
   },
   actions: {

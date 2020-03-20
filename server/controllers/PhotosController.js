@@ -5,7 +5,10 @@ import { photoService } from "../services/PhotoService";
 export class PhotosController extends BaseController {
   constructor() {
     super("api/photos");
-    this.router.get("", this.getPhoto).post("", this.savePhoto);
+    this.router
+      .get("", this.getPhoto)
+      .get("/all", this.getAllPhotos)
+      .post("", this.savePhoto);
   }
 
   async getPhoto(req, res, next) {
