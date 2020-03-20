@@ -9,13 +9,8 @@
       </div>
     </div>
     <div class="row bottom">
-      <div class="col-3 settings-background">
-        this is where the settings will go, and bg-img seetings
-      </div>
-      <div class="col-6 quote">
-        this is where the quote will go
-        <p>{{ pokemon }}</p>
-      </div>
+      <div class="col-3 settings-background">this is where the settings will go, and bg-img seetings</div>
+      <div class="col-6 quote">this is where the quote will go</div>
       <div class="col-3 todo">this is where the todo will go</div>
     </div>
   </div>
@@ -23,7 +18,6 @@
 
 <script>
 // @ is an alias to /src
-import axios from "axios";
 import Clock from "@/components/ClockGreeting.vue";
 export default {
   name: "Home",
@@ -32,14 +26,9 @@ export default {
   },
   components: {},
   mounted() {
-    this.$store.dispatch("getAll");
     this.$store.dispatch("getPhoto");
   },
-  computed: {
-    pokemon() {
-      return this.$store.state.pokemon;
-    }
-  },
+  computed: {},
   components: {
     Clock
   }

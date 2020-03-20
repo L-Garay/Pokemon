@@ -12,7 +12,6 @@ let api = axios.create({ baseURL: base + "api/" });
 
 export default new Vuex.Store({
   state: {
-    pokemon: [],
     userPreferences: {
       name: "",
       militaryTimeSelected: false,
@@ -21,9 +20,6 @@ export default new Vuex.Store({
     photo: null
   },
   mutations: {
-    setPokemon(state, pokemon) {
-      state.pokemon = pokemon;
-    },
     setUser(state, user) {
       state.userPreferences = user;
     },
@@ -32,12 +28,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async getAll({ commit, dispatch }) {
-      let res = await api.get("values");
-      commit("setPokemon", res.data);
-    },
     async getPhoto({ commit, dispatch }) {
-      let res = await api.get("values/photo");
+      let res = await api.get("photos");
       commit("setPhoto", res.data);
       console.log("PHOTO", res.data);
     },
