@@ -18,12 +18,16 @@ export default new Vuex.Store({
       setName: true
     },
     photo: null,
-    savedPhotos: []
+    savedPhotos: [],
+    quote: null
   },
   mutations: {
+    // User methods
     setUser(state, user) {
       state.userPreferences = user;
     },
+
+    // Photo methods
     setPhoto(state, photo) {
       state.photo = photo;
       console.log("state.photo", state.photo);
@@ -31,9 +35,16 @@ export default new Vuex.Store({
     setSavedPhotos(state, photos) {
       state.savedPhotos = photos;
       console.log(state.savedPhotos);
+    },
+
+    // Quote methods
+    setQuote(state, quote) {
+      state.quote = quote;
+      console.log(quote);
     }
   },
   actions: {
+    // User methods
     async setUser({ commit, dispatch }, user) {
       await api.post("users", user);
       dispatch("getUser");
@@ -43,6 +54,8 @@ export default new Vuex.Store({
       commit("setUser", res.data);
       return res.data;
     },
+
+    // Photo methods
     async getPhoto({ commit, dispatch }) {
       let res = await api.get("photos");
       commit("setPhoto", res.data);
@@ -58,6 +71,12 @@ export default new Vuex.Store({
     async getSavedPhotos({ commit, dispatch }) {
       let res = await api.get("photos/all");
       commit("setSavedPhotos", res.data);
+    },
+
+    // Quote methods
+    async getQuote({ commit, dispatch }) {
+      let res = await api.get("quotes");
+      commit("setQuote", res.data);
     }
   },
   modules: {}
