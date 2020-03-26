@@ -19,8 +19,7 @@
           @click="getNewPhoto"
         >Get photo</button>
         <button @click="savePhoto">Save photo</button>
-        Photo by
-        <a :href="pageUrl">Unsplash</a>
+        <p @click="openLink">Photo by Unsplash</p>
       </div>
       <div class="col-6 quote">this is where the quote will go</div>
       <div class="col-3 todo">this is where the todo will go</div>
@@ -43,13 +42,6 @@ export default {
   computed: {
     photo() {
       return this.$store.state.photo;
-    },
-    pageUrl() {
-      return (
-        "https://unsplash.com/@" +
-        this.photo.user.username +
-        "?utm_source=Inspire&utm_medium=referral"
-      );
     }
   },
   methods: {
@@ -69,6 +61,13 @@ export default {
         unsplashLink: this.$store.state.photo.links.html
       };
       this.$store.dispatch("savePhoto", savedPhoto);
+    },
+    openLink() {
+      window.open(
+        "https://unsplash.com/@" +
+          this.photo.user.username +
+          "?utm_source=Inspire&utm_medium=referral"
+      );
     }
   },
   components: {
