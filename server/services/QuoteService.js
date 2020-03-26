@@ -1,20 +1,8 @@
 import { dbContext } from "../db/DbContext";
 import { BadRequest } from "../utils/Errors";
-import fetch from "node-fetch";
 import axios from "axios";
 
-// @ts-ignore
-global.fetch = fetch;
 class QuoteService {
-  // async getQuote() {
-  //   try {
-  //     let data = await fetch("https://type.fit/api/quotes");
-  //     let formated = await data.json();
-  //     return formated;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
   async getQuote() {
     let data = await axios({
       method: "GET",
@@ -41,15 +29,12 @@ class QuoteService {
     // });
     return data;
   }
+  async saveQuote(quote) {
+    return await dbContext.Quote.create(quote);
+  }
+  async getSaved() {
+    return await dbContext.Quote.find(q => (q = {}));
+  }
 }
 
 export const quoteService = new QuoteService();
-// async getPhoto() {
-//   try {
-//     let data = await fetch(unsplashApi);
-//     let formatted = await data.json();
-//     return formatted;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// },

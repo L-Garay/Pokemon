@@ -19,7 +19,8 @@ export default new Vuex.Store({
     },
     photo: null,
     savedPhotos: [],
-    quote: null
+    quote: null,
+    savedQuotes: []
   },
   mutations: {
     // User methods
@@ -41,6 +42,10 @@ export default new Vuex.Store({
     setQuote(state, quote) {
       state.quote = quote;
       console.log(quote);
+    },
+    setSavedQuotes(state, quotes) {
+      state.savedQuotes = quotes;
+      console.log(quotes);
     }
   },
   actions: {
@@ -78,8 +83,8 @@ export default new Vuex.Store({
       let res = await api.get("quotes");
       commit("setQuote", res.data);
     },
-    async saveQuote({ commit, dispatch }) {
-      let res = await api.post("quotes");
+    async saveQuote({ commit, dispatch }, quote) {
+      await api.post("quotes", quote);
       dispatch("getSavedQuotes");
     },
     async getSavedQuotes({ commit, dispatch }) {
