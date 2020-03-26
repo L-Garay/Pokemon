@@ -9,7 +9,7 @@
     </div>
     <div class="row middle">
       <div class="col-6 offset-3 clockGreeting">
-        <clock />
+        <clock :parentTime="militaryTime" :bus="bus" />
       </div>
     </div>
     <div class="row bottom">
@@ -22,6 +22,8 @@
         <p @click="openLink">Photo by Unsplash</p>
         <button @click="getQuote">Get Quote</button>
         <button @click="saveQuote">Save Quote</button>
+        <button @click="setMilitary">Set to Military</button>
+        <button @click="setStandard">Set to Standard</button>
       </div>
       <div class="col-6 quote">
         <p>{{quote.quote}}</p>
@@ -35,10 +37,14 @@
 <script>
 // @ is an alias to /src
 import Clock from "@/components/ClockGreeting.vue";
+import Vue from "vue";
 export default {
   name: "Home",
   data() {
-    return {};
+    return {
+      militaryTime: false,
+      bus: new Vue()
+    };
   },
   components: {},
   mounted() {
@@ -54,6 +60,17 @@ export default {
     }
   },
   methods: {
+    setMilitary() {
+      this.militaryTime = true;
+      this.changeChild();
+    },
+    setStandard() {
+      this.militaryTime = false;
+      this.changeChild();
+    },
+    changeChild() {
+      this.bus.$emit("change");
+    },
     getNewPhoto() {
       this.$store.dispatch("getPhoto");
     },

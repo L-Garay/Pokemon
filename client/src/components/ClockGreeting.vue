@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div class="clock" v-if="User.militaryTimeSelected">
-      {{ militaryTime }}
-    </div>
+    <div class="clock" v-if="User.militaryTimeSelected">{{ militaryTime }}</div>
     <div class="clock" v-else>{{ time }}</div>
     <div class="greeting" v-if="userPreferences.setName">
       Good {{ timeOfDay }},
@@ -44,6 +42,7 @@ export default {
     this.getTime();
     this.getTimeOfDay();
     this.checkUser();
+    this.bus.$on("change", this.changeTime);
   },
   computed: {
     User() {
@@ -102,12 +101,26 @@ export default {
       }
       setTimeout(this.getTimeOfDay, 6000); //every minute (I don't know how this will effect app speed)
     },
+    changeTime() {
+      console.log("parentTime", this.parentTime);
+
+      if (this.parentTime == false) {
+        this.userPreferences.militaryTimeSelected = false;
+      } else if (this.parentTime == true) {
+        this.userPreferences.militaryTimeSelected = true;
+      }
+      console.log(this.userPreferences.militaryTimeSelected);
+      console.log(this.militaryTime);
+
+      this.submit();
+    },
     editName() {
       this.userPreferences.setName = true;
       this.userPreferences.name = "";
       this.$nextTick(() => this.$refs.focus.focus());
     }
-  }
+  },
+  props: ["parentTime", "bus"]
 };
 </script>
 
