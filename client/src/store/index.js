@@ -76,7 +76,8 @@ export default new Vuex.Store({
     // Quote methods
     async getQuote({ commit, dispatch }) {
       let res = await api.get("quotes");
-      commit("setQuote", res.data);
+      debugger;
+      commit("setQuote", res.data[0]);
     }
   },
   modules: {}

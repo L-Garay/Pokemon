@@ -12,7 +12,7 @@ export class QuotesController extends BaseController {
   async getQuote(req, res, next) {
     try {
       let data = await quoteService.getQuote();
-      return res.status(200).send(data);
+      return res.status(200).send(data.data);
     } catch (error) {
       next(error);
     }

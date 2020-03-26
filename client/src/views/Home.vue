@@ -20,6 +20,7 @@
         >Get photo</button>
         <button @click="savePhoto">Save photo</button>
         <p @click="openLink">Photo by Unsplash</p>
+        <button @click="getQuote">Get Quote</button>
       </div>
       <div class="col-6 quote">{{quote}}</div>
       <div class="col-3 todo">this is where the todo will go</div>
@@ -72,6 +73,9 @@ export default {
           this.photo.user.username +
           "?utm_source=Inspire&utm_medium=referral"
       );
+    },
+    getQuote() {
+      this.$store.dispatch("getQuote");
     }
   },
   components: {
