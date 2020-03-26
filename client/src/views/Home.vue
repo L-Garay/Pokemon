@@ -23,7 +23,10 @@
         <button @click="getQuote">Get Quote</button>
         <button @click="saveQuote">Save Quote</button>
       </div>
-      <div class="col-6 quote">{{quote}}</div>
+      <div class="col-6 quote">
+        <p>{{quote.quote}}</p>
+        <p>Author: {{quote.author}}</p>
+      </div>
       <div class="col-3 todo">this is where the todo will go</div>
     </div>
   </div>
