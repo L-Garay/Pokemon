@@ -21,7 +21,7 @@
         <button @click="savePhoto">Save photo</button>
         <p @click="openLink">Photo by Unsplash</p>
       </div>
-      <div class="col-6 quote">this is where the quote will go</div>
+      <div class="col-6 quote">{{quote}}</div>
       <div class="col-3 todo">this is where the todo will go</div>
     </div>
   </div>
@@ -38,10 +38,14 @@ export default {
   components: {},
   mounted() {
     this.$store.dispatch("getPhoto");
+    this.$store.dispatch("getQuote");
   },
   computed: {
     photo() {
       return this.$store.state.photo;
+    },
+    quote() {
+      return this.$store.state.quote;
     }
   },
   methods: {
