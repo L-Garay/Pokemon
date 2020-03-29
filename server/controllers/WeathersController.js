@@ -11,7 +11,7 @@ export class WeathersController extends BaseController {
   async getWeather(req, res, next) {
     try {
       let data = await weatherService.getWeather(req.body);
-      return res.status(200).send(data);
+      return res.status(200).send(data.data);
     } catch (error) {
       next(error);
     }

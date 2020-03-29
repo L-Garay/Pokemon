@@ -14,9 +14,9 @@ class WeatherService {
         "x-rapidapi-key": "8226d777c0mshfb5b9fdd88ded49p1ff2f6jsn3512d714e680"
       },
       params: {
-        units: "metric",
-        lat: "43.58144",
-        lon: "-116.33295"
+        units: "imperial",
+        lat: coord.lat,
+        lon: coord.lon
       }
     });
     return data;

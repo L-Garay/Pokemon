@@ -46,8 +46,8 @@ export default {
       }
     },
     async success(position) {
-      this.coord.lat = position.coords.latitude;
-      this.coord.lon = position.coords.longitude;
+      this.coord.lat = position.coords.latitude.toString();
+      this.coord.lon = position.coords.longitude.toString();
       let coords = { ...this.coord };
       debugger;
       this.$store.dispatch("getWeather", coords);
