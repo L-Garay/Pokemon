@@ -3,16 +3,17 @@
     <div class="background">
       <div class="content">
         <h1 class="Condition">
-          <i class="material-icons icon">wb_sunny</i> Sunny
+          <i class="material-icons icon">wb_sunny</i>
+          {{weather.weather[0].main}}
         </h1>
         <h1 class="Temp">
-          72 {{weather}}
+          {{weather.main.temp}}
           <span id="F">&#8457;</span>
         </h1>
         <h1 class="Time">09:35</h1>
         <h1 class="Location">
           <i class="material-icons locationIcon">place</i>
-          Raleigh, NC {{coord.lat}} {{coord.lon}}
+          {{weather.name}}
         </h1>
       </div>
     </div>
@@ -49,9 +50,7 @@ export default {
       this.coord.lat = position.coords.latitude.toString();
       this.coord.lon = position.coords.longitude.toString();
       let coords = { ...this.coord };
-      debugger;
       this.$store.dispatch("getWeather", coords);
-      console.log("formatted", coords);
     },
     error(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
