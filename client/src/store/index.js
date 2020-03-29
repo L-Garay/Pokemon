@@ -20,7 +20,8 @@ export default new Vuex.Store({
     photo: null,
     savedPhotos: [],
     quote: null,
-    savedQuotes: []
+    savedQuotes: [],
+    weather: null
   },
   mutations: {
     // User methods
@@ -46,6 +47,12 @@ export default new Vuex.Store({
     setSavedQuotes(state, quotes) {
       state.savedQuotes = quotes;
       console.log(quotes);
+    },
+
+    // Weather methods
+    setWeather(state, weather) {
+      state.weather = weather;
+      console.log(weather);
     }
   },
   actions: {
@@ -90,6 +97,12 @@ export default new Vuex.Store({
     async getSavedQuotes({ commit, dispatch }) {
       let res = await api.get("quotes/all");
       commit("setSavedQuotes", res.data);
+    },
+
+    // Weather methods
+    async getWeather({ commit, dispatch }, coords) {
+      let res = await api.get("weather", coords);
+      commit("setWeather", res.data);
     }
   },
   modules: {}

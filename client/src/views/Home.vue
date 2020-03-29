@@ -5,7 +5,9 @@
     :style="{ 'background-image': 'url(' + photo.urls.regular + ')'}"
   >
     <div class="row top">
-      <div class="col-3 offset-9 weather">weather will go here</div>
+      <div class="col-3 offset-9 weather">
+        <weather />
+      </div>
     </div>
     <div class="row middle">
       <div class="col-6 offset-3 clockGreeting">
@@ -37,6 +39,7 @@
 <script>
 // @ is an alias to /src
 import Clock from "@/components/ClockGreeting.vue";
+import Weather from "@/components/Weather.vue";
 import Vue from "vue";
 export default {
   name: "Home",
@@ -103,7 +106,8 @@ export default {
     }
   },
   components: {
-    Clock
+    Clock,
+    Weather
   }
 };
 </script>
