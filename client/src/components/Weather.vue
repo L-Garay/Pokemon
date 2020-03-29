@@ -12,7 +12,7 @@
         <h1 class="Time">09:35</h1>
         <h1 class="Location">
           <i class="material-icons locationIcon">place</i>
-          Raleigh, NC
+          Raleigh, NC {{coord.lat}} {{coord.lon}}
         </h1>
       </div>
     </div>
@@ -45,9 +45,10 @@ export default {
       }
     },
     success(position) {
-      this.lat = position.coords.latitude;
-      this.lon = position.coords.longitude;
-      this.$store.dispatch("getWeather", coords);
+      this.coord.lat = position.coords.latitude;
+      this.coord.lon = position.coords.longitude;
+      this.$store.dispatch("getWeather", this.coord);
+      console.log(this.coord);
     },
     error(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
