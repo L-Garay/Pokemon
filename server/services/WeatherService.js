@@ -4,8 +4,8 @@ import { BadRequest } from "../utils/Errors";
 import axios from "axios";
 
 class WeatherService {
-  async get(coord) {
-    let data = axios({
+  async getWeather(coord) {
+    let data = await axios({
       method: "GET",
       url: "https://community-open-weather-map.p.rapidapi.com/weather",
       headers: {
@@ -15,8 +15,8 @@ class WeatherService {
       },
       params: {
         units: "metric",
-        lat: `"${coord.lat}"`,
-        lon: `"${coord.lon}"`
+        lat: "43.58144",
+        lon: "-116.33295"
       }
     });
     return data;

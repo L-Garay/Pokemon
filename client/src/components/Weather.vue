@@ -26,7 +26,8 @@ export default {
     return {
       coord: {
         lat: null,
-        lon: null
+        lon: null,
+        test: "this is a test to see if this will pass"
       }
     };
   },
@@ -44,11 +45,13 @@ export default {
         navigator.geolocation.getCurrentPosition(this.success, this.error);
       }
     },
-    success(position) {
+    async success(position) {
       this.coord.lat = position.coords.latitude;
       this.coord.lon = position.coords.longitude;
-      this.$store.dispatch("getWeather", this.coord);
-      console.log(this.coord);
+      let coords = { ...this.coord };
+      debugger;
+      this.$store.dispatch("getWeather", coords);
+      console.log("formatted", coords);
     },
     error(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);

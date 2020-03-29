@@ -5,12 +5,12 @@ import { weatherService } from "../services/WeatherService";
 export class WeathersController extends BaseController {
   constructor() {
     super("api/weather");
-    this.router.get("", this.get);
+    this.router.post("", this.getWeather);
   }
 
-  async get(req, res, next) {
+  async getWeather(req, res, next) {
     try {
-      let data = await weatherService.get(req.body);
+      let data = await weatherService.getWeather(req.body);
       return res.status(200).send(data);
     } catch (error) {
       next(error);
