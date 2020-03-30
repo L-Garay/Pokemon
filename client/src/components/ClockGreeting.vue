@@ -62,6 +62,11 @@ export default {
         this.userPreferences.setName = false;
       }
     },
+    editName() {
+      this.userPreferences.setName = true;
+      this.userPreferences.name = "";
+      this.$nextTick(() => this.$refs.focus.focus());
+    },
     getTime() {
       let today = new Date();
       let h = today.getHours();
@@ -122,11 +127,6 @@ export default {
       };
       await this.$store.dispatch("updateTime", newUserTime);
       this.checkUser();
-    },
-    editName() {
-      this.userPreferences.setName = true;
-      this.userPreferences.name = "";
-      this.$nextTick(() => this.$refs.focus.focus());
     }
   },
   props: ["parentTime", "bus"]

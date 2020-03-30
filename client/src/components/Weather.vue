@@ -7,10 +7,10 @@
           {{weather.weather[0].main}}
         </h1>
         <h1 class="Temp">
-          {{weather.main.temp}}
+          {{Math.round(weather.main.temp)}}
           <span id="F">&#8457;</span>
         </h1>
-        <h1 class="Time">09:35</h1>
+        <h1 class="Time">{{month}} {{day}}</h1>
         <h1 class="Location">
           <i class="material-icons locationIcon">place</i>
           {{weather.name}}
@@ -29,11 +29,14 @@ export default {
         lat: null,
         lon: null,
         test: "this is a test to see if this will pass"
-      }
+      },
+      day: "",
+      month: ""
     };
   },
   mounted() {
     this.getLocation();
+    this.getDate();
   },
   computed: {
     weather() {
@@ -54,6 +57,25 @@ export default {
     },
     error(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
+    },
+    getDate() {
+      let date = new Date();
+      this.day = date.getDate();
+      let month = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ];
+      this.month = month[date.getMonth()];
     }
   }
 };
