@@ -4,27 +4,27 @@
       <div class="content">
         <h1 class="Condition">
           <div v-if="sunny">
-            <i class="fas fa-sun"></i>
+            <i class="fas fa-sun icon" :style="{'color': iconColor}"></i>
             {{weather.weather[0].main}}
           </div>
           <div v-else-if="rain">
-            <i class="fas fa-cloud-showers-heavy icon"></i>
+            <i class="fas fa-cloud-showers-heavy icon" :style="{'color': iconColor}"></i>
             {{weather.weather[0].main}}
           </div>
           <div v-else-if="cloudy">
-            <i class="fas fa-cloud icon"></i>
+            <i class="fas fa-cloud icon" :style="{'color': iconColor}"></i>
             {{weather.weather[0].main}}
           </div>
           <div v-else-if="snow">
-            <i class="far fa-snowflake icon"></i>
+            <i class="far fa-snowflake icon" :style="{'color': iconColor}"></i>
             {{weather.weather[0].main}}
           </div>
           <div v-else-if="fog">
-            <i class="fas fa-smog icon"></i>
+            <i class="fas fa-smog icon" :style="{'color': iconColor}"></i>
             {{weather.weather[0].main}}
           </div>
           <div v-else>
-            <i class="fas fa-question icon"></i>
+            <i class="fas fa-question icon" :style="{'color': iconColor}"></i>
             <p>Unkown Weather Condition</p>
           </div>
         </h1>
@@ -62,7 +62,8 @@ export default {
       fog: false,
       unkownCondition: false,
       backgroundColor: "",
-      textColor: "black"
+      textColor: "black",
+      iconColor: ""
     };
   },
   mounted() {
@@ -85,7 +86,7 @@ export default {
       this.coord.lon = position.coords.longitude.toString();
       let coords = { ...this.coord };
       await this.$store.dispatch("getWeather", coords);
-      await this.checkCondition();
+      // await this.checkCondition();
       this.setBackgroundColor();
     },
     error(err) {
@@ -164,11 +165,13 @@ export default {
       if (this.rain) {
         this.backgroundColor = "deepskyblue";
         this.textColor = "white";
+        this.iconColor = "grey";
       }
 
       // Snow
       if (this.snow == true) {
         this.backgroundColor = "white";
+        this.iconColor = "";
       }
 
       // Cloudy
@@ -181,6 +184,7 @@ export default {
       if (this.fog) {
         this.backgroundColor = "lightslategrey";
         this.textColor = "white";
+        this.iconColor = "rgb(206, 206, 202)";
       }
     }
   }
@@ -197,7 +201,7 @@ export default {
   width: 300px;
   border-radius: 10px;
   box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
-  background-color: rgb(241, 241, 188);
+  background-color: rgb(206, 206, 202);
 }
 
 /*  CONTENT  */
