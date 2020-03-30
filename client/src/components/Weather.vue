@@ -57,7 +57,7 @@ export default {
       sunny: false,
       partlyCloudy: false,
       rain: false,
-      snow: true,
+      snow: true /* using snow to test differnt sunny conditions  NOTE don't forget to change this back to false*/,
       cloudy: false,
       fog: false,
       unkownCondition: false,
@@ -86,7 +86,7 @@ export default {
       this.coord.lon = position.coords.longitude.toString();
       let coords = { ...this.coord };
       await this.$store.dispatch("getWeather", coords);
-      // await this.checkCondition();
+      // await this.checkCondition(); /* NOTE Don't forget to uncomment this out when done testing colors*/
       this.setBackgroundColor();
     },
     error(err) {
@@ -136,7 +136,7 @@ export default {
       }
     },
     setBackgroundColor() {
-      // Sunny
+      // Sunny NOTE Don't forget to finish selecting icon colors for sunny conditions
       if (this.sunny == true && this.$store.state.weather.main.temp > 100) {
         this.backgroundColor = "rgb(248, 78, 35)";
         this.iconColor = "rgb(252, 196, 15)";
@@ -172,7 +172,8 @@ export default {
 
       // Snow
       if (this.snow == true) {
-        this.backgroundColor = "rgb(248, 78, 35)";
+        this.backgroundColor =
+          "rgb(248, 78, 35)"; /* NOTE Don't forget to change this back to just background color white*/
         this.iconColor = "rgb(255, 36, 36)";
       }
 
@@ -203,7 +204,11 @@ export default {
   width: 300px;
   border-radius: 10px;
   box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
-  background-color: rgb(255, 36, 36);
+  background-color: rgb(
+    255,
+    36,
+    36
+  ); /* NOTE Don't forget to delete this line when done testing, using it to pick colors*/
 }
 
 /*  CONTENT  */
