@@ -8,23 +8,23 @@
             {{weather.weather[0].main}}
           </div>
           <div v-else-if="rain">
-            <i class="fas fa-cloud-showers-heavy"></i>
+            <i class="fas fa-cloud-showers-heavy icon"></i>
             {{weather.weather[0].main}}
           </div>
           <div v-else-if="cloudy">
-            <i class="fas fa-cloud"></i>
+            <i class="fas fa-cloud icon"></i>
             {{weather.weather[0].main}}
           </div>
           <div v-else-if="snow">
-            <i class="far fa-snowflake"></i>
+            <i class="far fa-snowflake icon"></i>
             {{weather.weather[0].main}}
           </div>
           <div v-else-if="fog">
-            <i class="fas fa-smog"></i>
+            <i class="fas fa-smog icon"></i>
             {{weather.weather[0].main}}
           </div>
           <div v-else>
-            <i class="fas fa-question"></i>
+            <i class="fas fa-question icon"></i>
             <p>Unkown Weather Condition</p>
           </div>
         </h1>
@@ -34,7 +34,7 @@
         </h1>
         <h1 class="Time">{{month}} {{day}}</h1>
         <h1 class="Location">
-          <i class="material-icons locationIcon">place</i>
+          <i class="fas fa-map-marker-alt locationIcon"></i>
           {{weather.name}}
         </h1>
       </div>
@@ -69,7 +69,6 @@ export default {
   },
   computed: {
     weather() {
-      // this.checkCondition();
       return this.$store.state.weather;
     }
   },
