@@ -3,8 +3,30 @@
     <div class="background">
       <div class="content">
         <h1 class="Condition">
-          <i class="material-icons icon">wb_sunny</i>
-          {{weather.weather[0].main}}
+          <div v-if="sunny">
+            <i class="fas fa-sun"></i>
+            {{weather.weather[0].main}}
+          </div>
+          <div v-else-if="rain">
+            <i class="fas fa-cloud-showers-heavy"></i>
+            {{weather.weather[0].main}}
+          </div>
+          <div v-else-if="cloudy">
+            <i class="fas fa-cloud"></i>
+            {{weather.weather[0].main}}
+          </div>
+          <div v-else-if="snow">
+            <i class="far fa-snowflake"></i>
+            {{weather.weather[0].main}}
+          </div>
+          <div v-else-if="fog">
+            <i class="fas fa-smog"></i>
+            {{weather.weather[0].main}}
+          </div>
+          <div v-else>
+            <i class="fas fa-question"></i>
+            <p>Unkown Weather Condition</p>
+          </div>
         </h1>
         <h1 class="Temp">
           {{Math.round(weather.main.temp)}}
@@ -31,7 +53,14 @@ export default {
         test: "this is a test to see if this will pass"
       },
       day: "",
-      month: ""
+      month: "",
+      sunny: false,
+      partlyCloudy: false,
+      rain: false,
+      snow: false,
+      cloudy: false,
+      fog: false,
+      unkownCondition: false
     };
   },
   mounted() {
@@ -40,6 +69,7 @@ export default {
   },
   computed: {
     weather() {
+      // this.checkCondition();
       return this.$store.state.weather;
     }
   },
@@ -53,7 +83,8 @@ export default {
       this.coord.lat = position.coords.latitude.toString();
       this.coord.lon = position.coords.longitude.toString();
       let coords = { ...this.coord };
-      this.$store.dispatch("getWeather", coords);
+      await this.$store.dispatch("getWeather", coords);
+      this.checkCondition();
     },
     error(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
@@ -76,6 +107,30 @@ export default {
         "December"
       ];
       this.month = month[date.getMonth()];
+    },
+    checkCondition() {
+      switch (this.$store.state.weather.weather[0].main) {
+        case "Clear":
+          this.sunny = true;
+          break;
+        case "Clouds":
+          this.cloudy = true;
+          break;
+        case "Rain":
+          this.rain = true;
+          break;
+        case "Snow":
+          this.snow = true;
+          break;
+        case "Fog":
+          this.fog = true;
+          break;
+        // case "Partly Cloudy":
+        //   this.partlyCloudy = true;
+        //   break;
+        default:
+          this.unkownCondition = true;
+      }
     }
   }
 };
