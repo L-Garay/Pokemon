@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main" :style="{'background-color': backgroundColor, 'color': textColor }">
     <div class="background">
       <div class="content">
         <h1 class="Condition">
@@ -60,7 +60,9 @@ export default {
       snow: false,
       cloudy: false,
       fog: false,
-      unkownCondition: false
+      unkownCondition: false,
+      backgroundColor: "",
+      textColor: "black"
     };
   },
   mounted() {
@@ -83,7 +85,8 @@ export default {
       this.coord.lon = position.coords.longitude.toString();
       let coords = { ...this.coord };
       await this.$store.dispatch("getWeather", coords);
-      this.checkCondition();
+      await this.checkCondition();
+      this.setBackgroundColor();
     },
     error(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
@@ -130,6 +133,55 @@ export default {
         default:
           this.unkownCondition = true;
       }
+    },
+    setBackgroundColor() {
+      // Sunny
+      if (this.sunny == true && this.$store.state.weather.main.temp > 100) {
+        this.backgroundColor = "rgb(248, 78, 35)";
+      } else if (
+        this.sunny == true &&
+        this.$store.state.weather.main.temp >= 70
+      ) {
+        this.backgroundColor = "rgb(248, 181, 35)";
+      } else if (
+        this.sunny == true &&
+        this.$store.state.weather.main.temp > 50
+      ) {
+        this.backgroundColor = "rgb(253, 253, 61)";
+      } else if (
+        this.sunny == true &&
+        this.$store.state.weather.main.temp > 0
+      ) {
+        this.backgroundColor = "rgb(241, 241, 126)";
+      } else if (
+        this.sunny == true &&
+        this.$store.state.weather.main.temp <= 0
+      ) {
+        this.backgroundColor = "rgb(241, 241, 188)";
+      }
+
+      // Rain
+      if (this.rain) {
+        this.backgroundColor = "deepskyblue";
+        this.textColor = "white";
+      }
+
+      // Snow
+      if (this.snow == true) {
+        this.backgroundColor = "white";
+      }
+
+      // Cloudy
+      if (this.cloudy) {
+        this.backgroundColor = "grey";
+        this.textColor = "white";
+      }
+
+      // Fog
+      if (this.fog) {
+        this.backgroundColor = "lightslategrey";
+        this.textColor = "white";
+      }
     }
   }
 };
@@ -143,9 +195,9 @@ export default {
   margin: 25px 0 100px 0;
   height: 90px;
   width: 300px;
-  background-color: #f17022;
   border-radius: 10px;
   box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+  background-color: rgb(241, 241, 188);
 }
 
 /*  CONTENT  */
