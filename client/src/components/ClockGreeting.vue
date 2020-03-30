@@ -101,9 +101,9 @@ export default {
       }
       setTimeout(this.getTimeOfDay, 6000); //every minute (I don't know how this will effect app speed)
     },
-    changeTime() {
+    async changeTime() {
       console.log("parentTime", this.parentTime);
-
+      // debugger;
       if (this.parentTime == false) {
         this.userPreferences.militaryTimeSelected = false;
       } else if (this.parentTime == true) {
@@ -112,7 +112,16 @@ export default {
       console.log(this.userPreferences.militaryTimeSelected);
       console.log(this.militaryTime);
 
-      this.submit();
+      this.updateTime();
+    },
+    async updateTime() {
+      let newUserTime = {
+        name: this.$store.state.userPreferences.name,
+        militaryTimeSelected: this.userPreferences.militaryTimeSelected,
+        setName: false
+      };
+      await this.$store.dispatch("updateTime", newUserTime);
+      this.checkUser();
     },
     editName() {
       this.userPreferences.setName = true;

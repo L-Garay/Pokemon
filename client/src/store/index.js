@@ -66,6 +66,11 @@ export default new Vuex.Store({
       commit("setUser", res.data);
       return res.data;
     },
+    async updateTime({ commit, dispatch }, newUser) {
+      console.log(newUser);
+      let res = await api.put("users", newUser);
+      commit("setUser", res.data);
+    },
 
     // Photo methods
     async getPhoto({ commit, dispatch }) {

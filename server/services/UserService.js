@@ -14,17 +14,9 @@ class UserService {
   async get() {
     return await dbContext.User.findOne(u => (u = {}));
   }
-  // async find(query = {}) {
-  //   let values = await dbContext.Values.find(query);
-  //   return values;
-  // }
-  // async findById(id) {
-  //   let value = await dbContext.Values.findById(id);
-  //   if (!value) {
-  //     throw new BadRequest("Invalid Id");
-  //   }
-  //   return value;
-  // }
+  async updateTime(body) {
+    return await dbContext.User.findOneAndUpdate(u => (u = {}), body);
+  }
 }
 
 export const userService = new UserService();

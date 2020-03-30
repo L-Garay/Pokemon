@@ -24,8 +24,8 @@
         <p @click="openLink">Photo by Unsplash</p>
         <button @click="getQuote">Get Quote</button>
         <button @click="saveQuote">Save Quote</button>
-        <button @click="setMilitary">Set to Military</button>
-        <button @click="setStandard">Set to Standard</button>
+        <button @click="chooseMilitary">Set to Military</button>
+        <button @click="chooseStandard">Set to Standard</button>
       </div>
       <div class="col-6 quote">
         <p>{{quote.quote}}</p>
@@ -63,13 +63,19 @@ export default {
     }
   },
   methods: {
-    setMilitary() {
-      this.militaryTime = true;
+    async chooseMilitary() {
+      await this.setMilitaryTime();
       this.changeChild();
     },
-    setStandard() {
-      this.militaryTime = false;
+    setMilitaryTime() {
+      this.militaryTime = true;
+    },
+    async chooseStandard() {
+      await this.setStandardTime();
       this.changeChild();
+    },
+    setStandardTime() {
+      this.militaryTime = false;
     },
     changeChild() {
       this.bus.$emit("change");
