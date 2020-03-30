@@ -57,7 +57,7 @@ export default {
       sunny: false,
       partlyCloudy: false,
       rain: false,
-      snow: false,
+      snow: true,
       cloudy: false,
       fog: false,
       unkownCondition: false,
@@ -139,11 +139,13 @@ export default {
       // Sunny
       if (this.sunny == true && this.$store.state.weather.main.temp > 100) {
         this.backgroundColor = "rgb(248, 78, 35)";
+        this.iconColor = "rgb(252, 196, 15)";
       } else if (
         this.sunny == true &&
         this.$store.state.weather.main.temp >= 70
       ) {
         this.backgroundColor = "rgb(248, 181, 35)";
+        this.iconColor = "rgb(250, 116, 39)";
       } else if (
         this.sunny == true &&
         this.$store.state.weather.main.temp > 50
@@ -170,8 +172,8 @@ export default {
 
       // Snow
       if (this.snow == true) {
-        this.backgroundColor = "white";
-        this.iconColor = "";
+        this.backgroundColor = "rgb(248, 78, 35)";
+        this.iconColor = "rgb(255, 36, 36)";
       }
 
       // Cloudy
@@ -201,7 +203,7 @@ export default {
   width: 300px;
   border-radius: 10px;
   box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
-  background-color: rgb(206, 206, 202);
+  background-color: rgb(255, 36, 36);
 }
 
 /*  CONTENT  */
