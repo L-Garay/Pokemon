@@ -54,6 +54,7 @@ export default {
       },
       day: "",
       month: "",
+      // Possible weather conditions
       sunny: false,
       partlyCloudy: false,
       rain: false,
@@ -61,6 +62,7 @@ export default {
       cloudy: false,
       fog: false,
       unkownCondition: false,
+      // For widget styling
       backgroundColor: "",
       textColor: "black",
       iconColor: ""
@@ -76,6 +78,7 @@ export default {
     }
   },
   methods: {
+    // Need to get current coordinates to get weather
     getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.success, this.error);
@@ -92,6 +95,7 @@ export default {
     error(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
     },
+    // Get the current date
     getDate() {
       let date = new Date();
       this.day = date.getDate();
@@ -111,6 +115,7 @@ export default {
       ];
       this.month = month[date.getMonth()];
     },
+    // Check the weather condition to then style the widget accordingly
     checkCondition() {
       switch (this.$store.state.weather.weather[0].main) {
         case "Clear":
@@ -136,6 +141,7 @@ export default {
       }
     },
     setBackgroundColor() {
+      // Sunny
       if (this.sunny == true && this.$store.state.weather.main.temp > 100) {
         this.backgroundColor = "rgb(248, 78, 35)";
         this.iconColor = "rgb(252, 196, 15)";
@@ -207,7 +213,7 @@ export default {
   box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-/*  CONTENT  */
+/* Content */
 
 .icon {
   z-index: 1000;
@@ -264,11 +270,5 @@ export default {
   font-weight: 200;
   right: 20px;
   bottom: 15px;
-}
-
-@keyframes enlarge {
-  50% {
-    transform: scale(1.2);
-  }
 }
 </style>
