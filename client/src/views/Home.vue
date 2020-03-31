@@ -63,6 +63,7 @@ export default {
     }
   },
   methods: {
+    // Time methods
     async chooseMilitary() {
       await this.setMilitaryTime();
       this.changeChild();
@@ -80,6 +81,8 @@ export default {
     changeChild() {
       this.bus.$emit("change");
     },
+
+    // Photo methods
     getNewPhoto() {
       this.$store.dispatch("getPhoto");
     },
@@ -104,6 +107,8 @@ export default {
           "?utm_source=Inspire&utm_medium=referral"
       );
     },
+
+    // Quote methods
     getQuote() {
       this.$store.dispatch("getQuote");
     },

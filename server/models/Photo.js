@@ -8,6 +8,7 @@ const Photo = new Schema(
     height: { type: Number, required: true },
     fullUrl: { type: String, required: true },
     regularUrl: { type: String, required: true },
+    thumbUrl: { type: String, required: true },
     downloadLocation: { type: String, required: true },
     userName: { type: String, required: true },
     name: { type: String, required: true },

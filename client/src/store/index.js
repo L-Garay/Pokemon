@@ -75,6 +75,8 @@ export default new Vuex.Store({
     // Photo methods
     async getPhoto({ commit, dispatch }) {
       let res = await api.get("photos");
+      console.log(res.data);
+
       commit("setPhoto", res.data);
     },
     async savePhoto({ commit, dispatch, state }, photo) {
