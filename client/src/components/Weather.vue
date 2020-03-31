@@ -69,8 +69,8 @@ export default {
     };
   },
   mounted() {
-    // this.getLocation();
-    // this.getDate();
+    this.getLocation();
+    this.getDate();
   },
   computed: {
     weather() {

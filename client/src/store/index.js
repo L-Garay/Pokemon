@@ -96,6 +96,10 @@ export default new Vuex.Store({
       console.log(res.data);
       commit("setPhoto", res.data);
     },
+    async deletePhoto({ commit, dispatch }, id) {
+      await api.delete("photos/" + id);
+      dispatch("getSavedPhotos");
+    },
 
     // Quote methods
     async getQuote({ commit, dispatch }) {

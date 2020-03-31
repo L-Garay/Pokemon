@@ -9,7 +9,8 @@ export class PhotosController extends BaseController {
       .get("", this.getPhoto)
       .get("/all", this.getAllPhotos)
       .get("/:id", this.selectPhoto)
-      .post("", this.savePhoto);
+      .post("", this.savePhoto)
+      .delete("", this.deletePhoto);
   }
 
   async getPhoto(req, res, next) {
@@ -40,6 +41,13 @@ export class PhotosController extends BaseController {
     try {
       let data = await photoService.getPhotoById(req.params.id);
       return res.status(200).send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+  async deletePhoto(req, res, next) {
+    try {
+      await photoService.deletePhoto(req.params.id);
     } catch (error) {
       next(error);
     }

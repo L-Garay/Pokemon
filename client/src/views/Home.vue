@@ -24,6 +24,7 @@
                     :src="photo.urls.thumbUrl"
                     alt="should be a small picture"
                   />
+                  <p @click="deletePhoto(photo._id)">Delete photo</p>
                 </div>
               </div>
             </div>
@@ -125,8 +126,11 @@ export default {
       };
       this.$store.dispatch("savePhoto", savedPhoto);
     },
-    selectPhoto(_id) {
-      this.$store.dispatch("selectPhoto", _id);
+    selectPhoto(id) {
+      this.$store.dispatch("selectPhoto", id);
+    },
+    deletePhoto(id) {
+      this.$store.dispatch("deletePhoto", id);
     },
     openLink() {
       window.open(
