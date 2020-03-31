@@ -8,6 +8,7 @@ export class PhotosController extends BaseController {
     this.router
       .get("", this.getPhoto)
       .get("/all", this.getAllPhotos)
+      .get("/:id", this.selectPhoto)
       .post("", this.savePhoto);
   }
 
@@ -30,6 +31,14 @@ export class PhotosController extends BaseController {
   async savePhoto(req, res, next) {
     try {
       let data = await photoService.savePhoto(req.body);
+      return res.status(200).send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+  async selectPhoto(req, res, next) {
+    try {
+      let data = await photoService.getPhotoById(req.params.id);
       return res.status(200).send(data);
     } catch (error) {
       next(error);

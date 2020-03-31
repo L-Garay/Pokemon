@@ -19,7 +19,11 @@
             <div class="container-fluid">
               <div class="row images">
                 <div class="col-3 image" v-for="photo in savedPhotos" :key="photo.id">
-                  <img :src="photo.thumbUrl" alt="should be a small picture" />
+                  <img
+                    @click="selectPhoto(photo._id)"
+                    :src="photo.thumbUrl"
+                    alt="should be a small picture"
+                  />
                 </div>
               </div>
             </div>
@@ -119,7 +123,9 @@ export default {
       };
       this.$store.dispatch("savePhoto", savedPhoto);
     },
-    selectPhoto(_id) {},
+    selectPhoto(_id) {
+      this.$store.dispatch("selectPhoto", _id);
+    },
     openLink() {
       window.open(
         "https://unsplash.com/@" +

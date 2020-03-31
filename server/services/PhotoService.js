@@ -13,6 +13,13 @@ class PhotoService {
     await unsplashMethods.savePhoto(body.old);
     return await dbContext.Photo.create(body.updated);
   }
+  async getPhotoById(id) {
+    let data = await dbContext.Photo.findById(id);
+    if (!data) {
+      throw new BadRequest("Invalid Id");
+    }
+    return data;
+  }
 }
 
 export const photoService = new PhotoService();
