@@ -93,6 +93,8 @@ export default new Vuex.Store({
     },
     async selectPhoto({ commit, dispatch }, id) {
       let res = await api.get("photos/" + id);
+      console.log(res.data);
+      debugger;
       commit("setPhoto", res.data);
     },
 

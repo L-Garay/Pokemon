@@ -21,7 +21,7 @@
                 <div class="col-3 image" v-for="photo in savedPhotos" :key="photo.id">
                   <img
                     @click="selectPhoto(photo._id)"
-                    :src="photo.thumbUrl"
+                    :src="photo.urls.thumbUrl"
                     alt="should be a small picture"
                   />
                 </div>
@@ -113,9 +113,11 @@ export default {
         id: this.$store.state.photo.id,
         width: this.$store.state.photo.width,
         height: this.$store.state.photo.height,
-        fullUrl: this.$store.state.photo.urls.full,
-        regularUrl: this.$store.state.photo.urls.regular,
-        thumbUrl: this.$store.state.photo.urls.thumb,
+        urls: {
+          fullUrl: this.$store.state.photo.urls.full,
+          regular: this.$store.state.photo.urls.regular,
+          thumbUrl: this.$store.state.photo.urls.thumb
+        },
         downloadLocation: this.$store.state.photo.links.download_location,
         userName: this.$store.state.photo.user.username,
         name: this.$store.state.photo.user.name,
