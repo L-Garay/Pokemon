@@ -12,6 +12,7 @@
     <div class="row middle">
       <div class="col-6 offset-3 clockGreeting">
         <clock :parentTime="militaryTime" :bus="bus" />
+        <greeting />
       </div>
       <div class="modal fade photoModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -57,7 +58,8 @@
 
 <script>
 // @ is an alias to /src
-import Clock from "@/components/ClockGreeting.vue";
+import Clock from "@/components/Clock.vue";
+import Greeting from "@/components/Greeting.vue";
 import Weather from "@/components/Weather.vue";
 import Vue from "vue";
 export default {
@@ -68,7 +70,6 @@ export default {
       bus: new Vue()
     };
   },
-  components: {},
   mounted() {
     this.$store.dispatch("getPhoto");
     this.$store.dispatch("getSavedPhotos");
@@ -151,6 +152,7 @@ export default {
   },
   components: {
     Clock,
+    Greeting,
     Weather
   }
 };
