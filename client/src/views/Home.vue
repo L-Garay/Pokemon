@@ -86,6 +86,7 @@ export default {
     }
   },
   methods: {
+    // NOTE All these methods will eventually be in a 'Settings' component
     // Time methods
     async chooseMilitary() {
       await this.setMilitaryTime();
