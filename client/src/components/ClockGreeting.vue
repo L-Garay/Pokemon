@@ -20,6 +20,10 @@
 </template>
 
 <script>
+// NOTE I'VE ONLY LEFT THIS COMPONENT HERE JUST IN CASE EITHER THE GREETING OR CLOCK COMPONENT BREAKS AND NEED A REFERENCE
+// NOTE THIS IS NOT BEING USED IN THE ACTUAL APPLICATION AND IS FOR REFERENCE ONLY
+// NOTE I'M ADDING THIS THIRD NOTE TO MAKE SURE I SEE THESE IN THE FUTURE
+// NOTE OVERKILL
 import VueInputAutoWidth from "vue-input-autowidth";
 import Vue from "vue";
 Vue.use(VueInputAutoWidth);
@@ -30,7 +34,6 @@ export default {
       time: "",
       militaryTime: "",
       timeOfDay: "evening",
-      // NOTE Don't forget to add the option to set time preference!!!
       userPreferences: {
         name: "",
         militaryTimeSelected: false,
