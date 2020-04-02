@@ -33,17 +33,20 @@
           <span id="F">&#8457;</span>
         </h1>
         <h1 class="Time">{{month}} {{day}}</h1>
-        <h1 class="Location">
+        <div>
           <input
             type="text"
-            v-model="city"
+            v-model="city.name"
             v-on:keyup.enter="submitNewCity"
-            v-autowidth="{ maxWidth: '75px', minWidth: '20px', comfortZone: 10 }"
-            v-if="changeCity"
+            v-autowidth="{ maxWidth: '100px', minWidth: '20px', comfortZone: 10 }"
+            v-if="city.changeCity"
+            class="locationInput"
           />
-          <i v-else class="fas fa-map-marker-alt locationIcon" @click="getNewCity"></i>
-          {{weather.name}}
-        </h1>
+          <h1 class="Location" v-else @click="getNewCity">
+            <i class="fas fa-map-marker-alt locationIcon"></i>
+            {{weather.name}}
+          </h1>
+        </div>
       </div>
     </div>
   </div>
@@ -76,8 +79,10 @@ export default {
       textColor: "black",
       iconColor: "",
       // Change city location
-      changeCity: false,
-      city: ""
+      city: {
+        changeCity: false,
+        name: ""
+      }
     };
   },
   mounted() {
@@ -129,11 +134,13 @@ export default {
     },
     // Will take the new city string and get new weather data
     getNewCity() {
-      this.changeCity = true;
+      this.city.changeCity = true;
     },
     submitNewCity() {
+      console.log("THIS IS THE CITY FROM THE WEATHER COMP", this.city);
+
       this.$store.dispatch("getNewWeather", this.city);
-      this.changeCity = false;
+      this.city.changeCity = false;
     },
     // Check the weather condition to then style the widget accordingly
     checkCondition() {
@@ -288,6 +295,12 @@ export default {
   font-family: "Noto Sans", sans-serif;
   font-size: 12px;
   font-weight: 200;
+  right: 20px;
+  bottom: 15px;
+}
+.locationInput {
+  z-index: 1000;
+  position: absolute;
   right: 20px;
   bottom: 15px;
 }

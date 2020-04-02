@@ -32,7 +32,7 @@ class WeatherService {
       },
       params: {
         units: "imperial",
-        q: city
+        q: city.name
       }
     });
     if (!data) {
