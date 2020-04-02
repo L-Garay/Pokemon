@@ -194,13 +194,6 @@ export default {
         default:
           this.unkownCondition = true;
       }
-      console.log("rain", this.rain);
-      console.log("sun", this.sunny);
-      console.log("cloudy", this.cloudy);
-      console.log("snow", this.snow);
-      console.log("fog", this.fog);
-      console.log("default", this.unkownCondition);
-
       this.setBackgroundColor();
     },
     setBackgroundColor() {
@@ -263,6 +256,7 @@ export default {
       if (this.cloudy) {
         let change = document.getElementById("changeColor");
         change.style.backgroundColor = "grey";
+        this.iconColor = "white";
         // this.textColor = "white";
       }
 
