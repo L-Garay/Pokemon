@@ -48,8 +48,7 @@
         <button @click="chooseStandard">Set to Standard</button>
       </div>
       <div class="col-6 quote">
-        <p>{{quote.quote}}</p>
-        <p>Author: {{quote.author}}</p>
+        <quote :bus="bus" />
       </div>
       <div class="col-3 todo">this is where the todo will go</div>
     </div>
@@ -60,6 +59,7 @@
 // @ is an alias to /src
 import Clock from "@/components/Clock.vue";
 import Greeting from "@/components/Greeting.vue";
+import Quote from "@/components/Quote.vue";
 import Weather from "@/components/Weather.vue";
 import Vue from "vue";
 export default {
@@ -73,7 +73,6 @@ export default {
   mounted() {
     this.$store.dispatch("getPhoto");
     this.$store.dispatch("getSavedPhotos");
-    this.$store.dispatch("getQuote");
   },
   computed: {
     photo() {
@@ -81,9 +80,6 @@ export default {
     },
     savedPhotos() {
       return this.$store.state.savedPhotos;
-    },
-    quote() {
-      return this.$store.state.quote;
     }
   },
   methods: {
@@ -144,15 +140,16 @@ export default {
 
     // Quote methods
     getQuote() {
-      this.$store.dispatch("getQuote");
+      this.bus.$emit("getQuote");
     },
     saveQuote() {
-      this.$store.dispatch("saveQuote", this.$store.state.quote);
+      this.bus.$emit("saveQuote");
     }
   },
   components: {
     Clock,
     Greeting,
+    Quote,
     Weather
   }
 };
