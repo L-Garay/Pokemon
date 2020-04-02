@@ -106,8 +106,7 @@ export default {
       this.coord.lon = position.coords.longitude.toString();
       let coords = { ...this.coord };
       await this.$store.dispatch("getWeather", coords);
-      await this.checkCondition();
-      this.setBackgroundColor();
+      this.checkCondition();
     },
     error(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
@@ -136,10 +135,10 @@ export default {
     getNewCity() {
       this.city.changeCity = true;
     },
-    submitNewCity() {
-      console.log("THIS IS THE CITY FROM THE WEATHER COMP", this.city);
+    async submitNewCity() {
+      await this.$store.dispatch("getNewWeather", this.city);
+      this.checkCondition();
 
-      this.$store.dispatch("getNewWeather", this.city);
       this.city.changeCity = false;
     },
     // Check the weather condition to then style the widget accordingly
@@ -166,8 +165,10 @@ export default {
         default:
           this.unkownCondition = true;
       }
+      this.setBackgroundColor();
     },
     setBackgroundColor() {
+      debugger;
       // Sunny
       if (this.sunny == true && this.$store.state.weather.main.temp > 100) {
         this.backgroundColor = "rgb(248, 78, 35)";
@@ -188,8 +189,11 @@ export default {
         this.sunny == true &&
         this.$store.state.weather.main.temp > 0
       ) {
-        this.backgroundColor = "rgb(241, 241, 126)";
-        this.iconColor = "rgb(252, 161, 41)";
+        this.backgroundColor = "black";
+        // this.backgroundColor = "rgb(241, 241, 126)";
+        // this.iconColor = "rgb(252, 161, 41)";
+        this.iconColor = "red";
+        this.textColor = "red";
       } else if (
         this.sunny == true &&
         this.$store.state.weather.main.temp <= 0
