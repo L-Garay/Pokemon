@@ -119,6 +119,10 @@ export default new Vuex.Store({
     async getWeather({ commit, dispatch }, coord) {
       let res = await api.post("weather", coord);
       commit("setWeather", res.data);
+    },
+    async getNewWeather({ commit, dispatch }, city) {
+      let res = await api.post("weather/change", city);
+      commit("setWeather", res.data);
     }
   },
   modules: {}

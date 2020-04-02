@@ -34,7 +34,14 @@
         </h1>
         <h1 class="Time">{{month}} {{day}}</h1>
         <h1 class="Location">
-          <i class="fas fa-map-marker-alt locationIcon"></i>
+          <input
+            type="text"
+            v-model="city"
+            v-on:keyup.enter="submitNewCity"
+            v-autowidth="{ maxWidth: '75px', minWidth: '20px', comfortZone: 10 }"
+            v-if="changeCity"
+          />
+          <i v-else class="fas fa-map-marker-alt locationIcon" @click="getNewCity"></i>
           {{weather.name}}
         </h1>
       </div>
@@ -43,14 +50,16 @@
 </template>
 
 <script>
+import VueInputAutoWidth from "vue-input-autowidth";
+import Vue from "vue";
+Vue.use(VueInputAutoWidth);
 export default {
   name: "Weather",
   data() {
     return {
       coord: {
         lat: null,
-        lon: null,
-        test: "this is a test to see if this will pass"
+        lon: null
       },
       day: "",
       month: "",
@@ -65,7 +74,10 @@ export default {
       // For widget styling
       backgroundColor: "",
       textColor: "black",
-      iconColor: ""
+      iconColor: "",
+      // Change city location
+      changeCity: false,
+      city: ""
     };
   },
   mounted() {
@@ -114,6 +126,14 @@ export default {
         "December"
       ];
       this.month = month[date.getMonth()];
+    },
+    // Will take the new city string and get new weather data
+    getNewCity() {
+      this.changeCity = true;
+    },
+    submitNewCity() {
+      this.$store.dispatch("getNewWeather", this.city);
+      this.changeCity = false;
     },
     // Check the weather condition to then style the widget accordingly
     checkCondition() {
