@@ -1,5 +1,9 @@
 <template>
-  <div class="main" :style="{'background-color': backgroundColor, 'color': textColor }">
+  <div
+    class="main"
+    id="changeColor"
+    :style="{'background-color': backgroundColor, 'color': textColor }"
+  >
     <div class="background">
       <div class="content">
         <h1 class="Condition">
@@ -146,18 +150,43 @@ export default {
       switch (this.$store.state.weather.weather[0].main) {
         case "Clear":
           this.sunny = true;
+          this.cloudy = false;
+          this.rain = false;
+          this.snow = false;
+          this.fog = false;
+          this.textColor = "black";
           break;
         case "Clouds":
           this.cloudy = true;
+          this.sunny = false;
+          this.rain = false;
+          this.snow = false;
+          this.fog = false;
+          this.textColor = "white";
           break;
         case "Rain":
           this.rain = true;
+          this.cloudy = false;
+          this.sunny = false;
+          this.snow = false;
+          this.fog = false;
+          this.textColor = "white";
           break;
         case "Snow":
           this.snow = true;
+          this.cloudy = false;
+          this.sunny = false;
+          this.rain = false;
+          this.fog = false;
+          this.textColor = "black";
           break;
         case "Fog":
           this.fog = true;
+          this.cloudy = false;
+          this.sunny = false;
+          this.snow = false;
+          this.rain = false;
+          this.textColor = "white";
           break;
         // case "Partly Cloudy":
         //   this.partlyCloudy = true;
@@ -165,66 +194,83 @@ export default {
         default:
           this.unkownCondition = true;
       }
+      console.log("rain", this.rain);
+      console.log("sun", this.sunny);
+      console.log("cloudy", this.cloudy);
+      console.log("snow", this.snow);
+      console.log("fog", this.fog);
+      console.log("default", this.unkownCondition);
+
       this.setBackgroundColor();
     },
     setBackgroundColor() {
-      debugger;
       // Sunny
+      // NOTE THE MAIN BACKGROUND COLOR AND TEXT COLOR DON'T CHANGE BECUASE THE ELEMENT THAT SETS THE COLORS NEVER GET'S RE-RENDERED AFTER NEW CITY IS FOUND...ONLY THE ICON COLOR AND ACTUAL DATA GET'S CHANGED
+      // NOTE WORKAROUND IS TO 'FORCE' CHANGE THE COLORS USING getElementById
+
       if (this.sunny == true && this.$store.state.weather.main.temp > 100) {
-        this.backgroundColor = "rgb(248, 78, 35)";
+        let change = document.getElementById("changeColor");
+        change.style.backgroundColor = "rgb(248, 78, 35)";
         this.iconColor = "rgb(252, 196, 15)";
       } else if (
         this.sunny == true &&
         this.$store.state.weather.main.temp >= 70
       ) {
-        this.backgroundColor = "rgb(248, 181, 35)";
+        let change = document.getElementById("changeColor");
+        change.style.backgroundColor = "rgb(248, 181, 35)";
         this.iconColor = "rgb(252, 62, 29)";
       } else if (
         this.sunny == true &&
         this.$store.state.weather.main.temp > 50
       ) {
-        this.backgroundColor = "rgb(253, 253, 61)";
+        let change = document.getElementById("changeColor");
+        change.style.backgroundColor = "rgb(253, 253, 61)";
         this.iconColor = "rgb(252, 155, 29)";
       } else if (
         this.sunny == true &&
         this.$store.state.weather.main.temp > 0
       ) {
-        this.backgroundColor = "black";
         // this.backgroundColor = "rgb(241, 241, 126)";
         // this.iconColor = "rgb(252, 161, 41)";
-        this.iconColor = "red";
-        this.textColor = "red";
+        let change = document.getElementById("changeColor");
+        change.style.backgroundColor = "rgb(241, 241, 126)";
+        this.iconColor = "rgb(252, 161, 41)";
       } else if (
         this.sunny == true &&
         this.$store.state.weather.main.temp <= 0
       ) {
-        this.backgroundColor = "rgb(241, 241, 188)";
+        let change = document.getElementById("changeColor");
+        change.style.backgroundColor = "rgb(241, 241, 188)";
         this.iconColor = "rgb(252, 161, 41)";
       }
 
       // Rain
       if (this.rain) {
-        this.backgroundColor = "deepskyblue";
-        this.textColor = "white";
+        let change = document.getElementById("changeColor");
+        change.style.backgroundColor = "deepskyblue";
+        // this.textColor = "white";
         this.iconColor = "grey";
       }
 
       // Snow
       if (this.snow == true) {
-        this.backgroundColor = "white";
+        let change = document.getElementById("changeColor");
+        change.style.backgroundColor = "white";
         this.iconColor = "black";
       }
 
       // Cloudy
       if (this.cloudy) {
-        this.backgroundColor = "grey";
-        this.textColor = "white";
+        let change = document.getElementById("changeColor");
+        change.style.backgroundColor = "grey";
+        // this.textColor = "white";
       }
 
       // Fog
       if (this.fog) {
-        this.backgroundColor = "lightslategrey";
-        this.textColor = "white";
+        let change = document.getElementById("changeColor");
+        change.style.backgroundColor = "lightslategrey";
+        // this.textColor = "white";
         this.iconColor = "rgb(206, 206, 202)";
       }
     }
