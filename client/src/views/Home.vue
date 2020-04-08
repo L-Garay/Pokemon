@@ -19,11 +19,7 @@
           <div class="modal-content">
             <div class="container-fluid">
               <div class="row images">
-                <div
-                  class="col-3 image"
-                  v-for="photo in savedPhotos"
-                  :key="photo.id"
-                >
+                <div class="col-3 image" v-for="photo in savedPhotos" :key="photo.id">
                   <img
                     @click="selectPhoto(photo._id)"
                     :src="photo.urls.thumbUrl"
@@ -83,10 +79,10 @@
           class="modal bd-example-modal-sm"
           tabindex="-1"
           role="dialog"
-          id="modal"
           data-keyboard="true"
+          id="modal"
         >
-          <div class="modal-dialog">
+          <div class="modal-dialog" id="modal-position">
             <div class="modal-content">
               <h5 class="settings-title">Photo Settings</h5>
               <div class="individual">
@@ -99,13 +95,7 @@
               </div>
               <div class="individual">
                 <p class="settings-text">Select a saved photo</p>
-                <button
-                  type="button"
-                  data-toggle="modal"
-                  data-target=".photoModal"
-                >
-                  Choose Photo
-                </button>
+                <button type="button" data-toggle="modal" data-target=".photoModal">Choose Photo</button>
               </div>
 
               <h5 class="settings-title">Quote Settings</h5>
@@ -133,9 +123,7 @@
         <div class="settings">
           <!-- <p @click="toggleSettings">Settings (gear symbol)</p>
           <p @click="openLink">Photo by Unsplash</p>-->
-          <button type="button" class="btn btn-primary" @click="openModal">
-            Small modal
-          </button>
+          <button type="button" class="btn btn-primary" @click="openModal">Small modal</button>
         </div>
       </div>
       <div class="col-6 quote">
@@ -161,7 +149,7 @@ export default {
       militaryTime: false,
       bus: new Vue(),
       changeSettings: false,
-      showModal: false,
+      showModal: false
     };
   },
 
@@ -175,7 +163,7 @@ export default {
     },
     savedPhotos() {
       return this.$store.state.savedPhotos;
-    },
+    }
   },
   methods: {
     // NOTE All these methods will eventually be in a 'Settings' component
@@ -210,12 +198,12 @@ export default {
         urls: {
           fullUrl: this.$store.state.photo.urls.full,
           regular: this.$store.state.photo.urls.regular,
-          thumbUrl: this.$store.state.photo.urls.thumb,
+          thumbUrl: this.$store.state.photo.urls.thumb
         },
         downloadLocation: this.$store.state.photo.links.download_location,
         userName: this.$store.state.photo.user.username,
         name: this.$store.state.photo.user.name,
-        unsplashLink: this.$store.state.photo.links.html,
+        unsplashLink: this.$store.state.photo.links.html
       };
       this.$store.dispatch("savePhoto", savedPhoto);
     },
@@ -254,14 +242,14 @@ export default {
       $(".modal-backdrop").remove();
       this.showModal = true;
     },
-    closeModal() {},
+    closeModal() {}
   },
   components: {
     Clock,
     Greeting,
     Quote,
-    Weather,
-  },
+    Weather
+  }
 };
 </script>
 
@@ -309,6 +297,10 @@ export default {
 .settings p {
   margin-bottom: 0;
 }
+.individual {
+  display: flex;
+  color: black;
+}
 /* .settings-card {
   color: white;
   background-color: grey;
@@ -323,13 +315,18 @@ export default {
   height: 300px;
   overflow-y: scroll;
 } */
-#modal {
-  top: 480px;
-  left: -440px;
-}
 
-.individual {
-  display: flex;
-  color: black;
+/* Modal specific styling */
+@media screen and (min-width: 1100px) {
+  #modal-position {
+    top: 420px;
+    left: -426px;
+  }
+}
+@media screen and (min-width: 1400px) {
+  #modal-position {
+    top: 600px;
+    left: -802px;
+  }
 }
 </style>
