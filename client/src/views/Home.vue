@@ -35,28 +35,44 @@
     </div>
     <div class="row bottom">
       <div class="col-3 settings-background">
-        <div v-if="changeSettings" class="card">
-          <h5 class="card-header" @click="toggleSettings">Settings</h5>
-          <div class="card-body">
-            <h5 class="card-title">Photo Settings</h5>
-            <p class="card-text">Get a new photo</p>
-            <button @click="getNewPhoto">Get photo</button>
-            <p class="card-text">Save the current photo</p>
-            <button @click="savePhoto">Save photo</button>
-            <p class="card-text">Select a saved photo</p>
-            <button type="button" data-toggle="modal" data-target=".photoModal">Choose Photo</button>
-            <h5 class="card-title">Quote Settings</h5>
-            <p class="card-text">Get a new quote</p>
-            <button @click="getQuote">Get Quote</button>
-            <p class="card-text">Save quote</p>
-            <button @click="saveQuote">Save Quote</button>
-            <!-- <p class="card-text">Get a new quote</p>
+        <div v-if="changeSettings" class="settings-card">
+          <h3 class="settings-header" @click="toggleSettings">Settings</h3>
+          <div class="settings-body">
+            <h5 class="settings-title">Photo Settings</h5>
+            <div class="individual">
+              <p class="settings-text">Get a new photo</p>
+              <button @click="getNewPhoto">Get photo</button>
+            </div>
+            <div class="individual">
+              <p class="settings-text">Save the current photo</p>
+              <button @click="savePhoto">Save photo</button>
+            </div>
+            <div class="individual">
+              <p class="settings-text">Select a saved photo</p>
+              <button type="button" data-toggle="modal" data-target=".photoModal">Choose Photo</button>
+            </div>
+
+            <h5 class="settings-title">Quote Settings</h5>
+            <div class="individual">
+              <p class="settings-text">Get a new quote</p>
+              <button @click="getQuote">Get Quote</button>
+            </div>
+            <div class="individual">
+              <p class="settings-text">Save quote</p>
+              <button @click="saveQuote">Save Quote</button>
+            </div>
+
+            <!-- <p class="settings-text">Get a new quote</p>
             <button @click="getQuote">Get Quote</button>-->
-            <h5 class="card-title">Time Settings</h5>
-            <p class="card-text">Set to military</p>
-            <button @click="chooseMilitary">Set to Military</button>
-            <p class="card-text">Set to standard</p>
-            <button @click="chooseStandard">Set to Standard</button>
+            <h5 class="settings-title">Time Settings</h5>
+            <div class="individual">
+              <p class="settings-text">Set to military</p>
+              <button @click="chooseMilitary">Set to Military</button>
+            </div>
+            <div class="individual">
+              <p class="settings-text">Set to standard</p>
+              <button @click="chooseStandard">Set to Standard</button>
+            </div>
           </div>
         </div>
         <div v-else>
@@ -74,11 +90,12 @@
         <button @click="saveQuote">Save Quote</button>
         <button @click="chooseMilitary">Set to Military</button>
       <button @click="chooseStandard">Set to Standard</button>-->
+
+      <div class="col-6 quote">
+        <quote :bus="bus" />
+      </div>
+      <div class="col-3 todo">this is where the todo will go</div>
     </div>
-    <div class="col-6 quote">
-      <quote :bus="bus" />
-    </div>
-    <div class="col-3 todo">this is where the todo will go</div>
   </div>
 </template>
 
@@ -178,8 +195,9 @@ export default {
     toggleSettings() {
       if (this.changeSettings) {
         this.changeSettings = false;
+      } else {
+        this.changeSettings = true;
       }
-      this.changeSettings = true;
     }
   },
   components: {
@@ -209,5 +227,22 @@ export default {
   height: 100px;
   width: 175px;
   margin: 3px;
+}
+
+/* Settings styling */
+.settings-card {
+  color: white;
+  background-color: grey;
+  border: 2pt solid black;
+  height: 550px;
+}
+.settings-body {
+  height: 500px;
+  overflow-y: scroll;
+}
+.individual {
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 10px 2px 10px;
 }
 </style>
