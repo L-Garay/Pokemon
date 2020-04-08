@@ -35,8 +35,36 @@
     </div>
     <div class="row bottom">
       <div class="col-3 settings-background">
-        this is where the settings will go, and bg-img seetings
-        <button
+        <div v-if="changeSettings" class="card">
+          <h5 class="card-header" @click="toggleSettings">Settings</h5>
+          <div class="card-body">
+            <h5 class="card-title">Photo Settings</h5>
+            <p class="card-text">Get a new photo</p>
+            <button @click="getNewPhoto">Get photo</button>
+            <p class="card-text">Save the current photo</p>
+            <button @click="savePhoto">Save photo</button>
+            <p class="card-text">Select a saved photo</p>
+            <button type="button" data-toggle="modal" data-target=".photoModal">Choose Photo</button>
+            <h5 class="card-title">Quote Settings</h5>
+            <p class="card-text">Get a new quote</p>
+            <button @click="getQuote">Get Quote</button>
+            <p class="card-text">Save quote</p>
+            <button @click="saveQuote">Save Quote</button>
+            <!-- <p class="card-text">Get a new quote</p>
+            <button @click="getQuote">Get Quote</button>-->
+            <h5 class="card-title">Time Settings</h5>
+            <p class="card-text">Set to military</p>
+            <button @click="chooseMilitary">Set to Military</button>
+            <p class="card-text">Set to standard</p>
+            <button @click="chooseStandard">Set to Standard</button>
+          </div>
+        </div>
+        <div v-else>
+          <p @click="toggleSettings">Settings (gear symbol)</p>
+          <p @click="openLink">Photo by Unsplash</p>
+        </div>
+      </div>
+      <!-- <button
           @click="getNewPhoto"
         >Get photo</button>
         <button @click="savePhoto">Save photo</button>
@@ -45,13 +73,12 @@
         <button @click="getQuote">Get Quote</button>
         <button @click="saveQuote">Save Quote</button>
         <button @click="chooseMilitary">Set to Military</button>
-        <button @click="chooseStandard">Set to Standard</button>
-      </div>
-      <div class="col-6 quote">
-        <quote :bus="bus" />
-      </div>
-      <div class="col-3 todo">this is where the todo will go</div>
+      <button @click="chooseStandard">Set to Standard</button>-->
     </div>
+    <div class="col-6 quote">
+      <quote :bus="bus" />
+    </div>
+    <div class="col-3 todo">this is where the todo will go</div>
   </div>
 </template>
 
@@ -67,7 +94,8 @@ export default {
   data() {
     return {
       militaryTime: false,
-      bus: new Vue()
+      bus: new Vue(),
+      changeSettings: false
     };
   },
   mounted() {
@@ -144,6 +172,14 @@ export default {
     },
     saveQuote() {
       this.bus.$emit("saveQuote");
+    },
+
+    // Setting methods
+    toggleSettings() {
+      if (this.changeSettings) {
+        this.changeSettings = false;
+      }
+      this.changeSettings = true;
     }
   },
   components: {
