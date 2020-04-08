@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="row bottom">
-      <div class="col-3 settings-background">
+      <div class="col-3 settings-section">
         <div v-if="changeSettings" class="settings-card">
           <h3 class="settings-header" @click="toggleSettings">Settings</h3>
           <div class="settings-body">
@@ -75,7 +75,7 @@
             </div>
           </div>
         </div>
-        <div v-else>
+        <div v-else class="settings">
           <p @click="toggleSettings">Settings (gear symbol)</p>
           <p @click="openLink">Photo by Unsplash</p>
         </div>
@@ -178,7 +178,7 @@ export default {
     openLink() {
       window.open(
         "https://unsplash.com/@" +
-          this.photo.user.username +
+          this.$store.state.photo.user.userName +
           "?utm_source=Inspire&utm_medium=referral"
       );
     },
@@ -216,6 +216,17 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: none;
+  /* position: relative; */
+}
+.row.top {
+  height: 25vh;
+}
+.row.middle {
+  height: 65vh;
+}
+.row.bottom {
+  height: 10vh;
+  color: white;
 }
 .row.images {
   display: flex;
@@ -230,14 +241,30 @@ export default {
 }
 
 /* Settings styling */
+.settings-section {
+  display: flex;
+}
+.settings {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+.settings p {
+  margin-bottom: 0;
+}
 .settings-card {
   color: white;
   background-color: grey;
   border: 2pt solid black;
-  height: 550px;
+  height: 350px;
+}
+.settings-header {
+  border-bottom: 1pt solid black;
+  cursor: pointer;
 }
 .settings-body {
-  height: 500px;
+  height: 300px;
   overflow-y: scroll;
 }
 .individual {
