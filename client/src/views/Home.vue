@@ -2,7 +2,7 @@
   <div
     class="container-fluid"
     id="home"
-    :style="{ 'background-image': 'url(' + photo.urls.regular + ')'}"
+    :style="{ 'background-image': 'url(' + photo.urls.regular + ')' }"
   >
     <div class="row top">
       <div class="col-3 offset-9 weather">
@@ -19,7 +19,11 @@
           <div class="modal-content">
             <div class="container-fluid">
               <div class="row images">
-                <div class="col-3 image" v-for="photo in savedPhotos" :key="photo.id">
+                <div
+                  class="col-3 image"
+                  v-for="photo in savedPhotos"
+                  :key="photo.id"
+                >
                   <img
                     @click="selectPhoto(photo._id)"
                     :src="photo.urls.thumbUrl"
@@ -95,7 +99,13 @@
               </div>
               <div class="individual">
                 <p class="settings-text">Select a saved photo</p>
-                <button type="button" data-toggle="modal" data-target=".photoModal">Choose Photo</button>
+                <button
+                  type="button"
+                  data-toggle="modal"
+                  data-target=".photoModal"
+                >
+                  Choose Photo
+                </button>
               </div>
 
               <h5 class="settings-title">Quote Settings</h5>
@@ -123,7 +133,9 @@
         <div class="settings">
           <!-- <p @click="toggleSettings">Settings (gear symbol)</p>
           <p @click="openLink">Photo by Unsplash</p>-->
-          <button type="button" class="btn btn-primary" @click="openModal">Small modal</button>
+          <button type="button" class="btn btn-primary" @click="openModal">
+            Small modal
+          </button>
         </div>
       </div>
       <div class="col-6 quote">
@@ -141,15 +153,18 @@ import Greeting from "@/components/Greeting.vue";
 import Quote from "@/components/Quote.vue";
 import Weather from "@/components/Weather.vue";
 import Vue from "vue";
+
 export default {
   name: "Home",
   data() {
     return {
       militaryTime: false,
       bus: new Vue(),
-      changeSettings: false
+      changeSettings: false,
+      showModal: false,
     };
   },
+
   mounted() {
     this.$store.dispatch("getPhoto");
     this.$store.dispatch("getSavedPhotos");
@@ -160,7 +175,7 @@ export default {
     },
     savedPhotos() {
       return this.$store.state.savedPhotos;
-    }
+    },
   },
   methods: {
     // NOTE All these methods will eventually be in a 'Settings' component
@@ -195,12 +210,12 @@ export default {
         urls: {
           fullUrl: this.$store.state.photo.urls.full,
           regular: this.$store.state.photo.urls.regular,
-          thumbUrl: this.$store.state.photo.urls.thumb
+          thumbUrl: this.$store.state.photo.urls.thumb,
         },
         downloadLocation: this.$store.state.photo.links.download_location,
         userName: this.$store.state.photo.user.username,
         name: this.$store.state.photo.user.name,
-        unsplashLink: this.$store.state.photo.links.html
+        unsplashLink: this.$store.state.photo.links.html,
       };
       this.$store.dispatch("savePhoto", savedPhoto);
     },
@@ -237,14 +252,16 @@ export default {
     openModal() {
       $("#modal").modal("show");
       $(".modal-backdrop").remove();
-    }
+      this.showModal = true;
+    },
+    closeModal() {},
   },
   components: {
     Clock,
     Greeting,
     Quote,
-    Weather
-  }
+    Weather,
+  },
 };
 </script>
 
