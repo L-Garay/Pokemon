@@ -35,7 +35,7 @@
     </div>
     <div class="row bottom">
       <div class="col-3 settings-section">
-        <div v-if="changeSettings" class="settings-card">
+        <!-- <div v-if="changeSettings" class="settings-card">
           <h3 class="settings-header" @click="toggleSettings">Settings</h3>
           <div class="settings-body">
             <h5 class="settings-title">Photo Settings</h5>
@@ -62,8 +62,8 @@
               <button @click="saveQuote">Save Quote</button>
             </div>
 
-            <!-- <p class="settings-text">Get a new quote</p>
-            <button @click="getQuote">Get Quote</button>-->
+            <p class="settings-text">Get a new quote</p>
+            <button @click="getQuote">Get Quote</button>
             <h5 class="settings-title">Time Settings</h5>
             <div class="individual">
               <p class="settings-text">Set to military</p>
@@ -74,23 +74,58 @@
               <button @click="chooseStandard">Set to Standard</button>
             </div>
           </div>
+        </div>-->
+        <div
+          class="modal bd-example-modal-sm"
+          tabindex="-1"
+          role="dialog"
+          id="modal"
+          data-keyboard="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <h5 class="settings-title">Photo Settings</h5>
+              <div class="individual">
+                <p class="settings-text">Get a new photo</p>
+                <button @click="getNewPhoto">Get photo</button>
+              </div>
+              <div class="individual">
+                <p class="settings-text">Save the current photo</p>
+                <button @click="savePhoto">Save photo</button>
+              </div>
+              <div class="individual">
+                <p class="settings-text">Select a saved photo</p>
+                <button type="button" data-toggle="modal" data-target=".photoModal">Choose Photo</button>
+              </div>
+
+              <h5 class="settings-title">Quote Settings</h5>
+              <div class="individual">
+                <p class="settings-text">Get a new quote</p>
+                <button @click="getQuote">Get Quote</button>
+              </div>
+              <div class="individual">
+                <p class="settings-text">Save quote</p>
+                <button @click="saveQuote">Save Quote</button>
+              </div>
+
+              <h5 class="settings-title">Time Settings</h5>
+              <div class="individual">
+                <p class="settings-text">Set to military</p>
+                <button @click="chooseMilitary">Set to Military</button>
+              </div>
+              <div class="individual">
+                <p class="settings-text">Set to standard</p>
+                <button @click="chooseStandard">Set to Standard</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div v-else class="settings">
-          <p @click="toggleSettings">Settings (gear symbol)</p>
-          <p @click="openLink">Photo by Unsplash</p>
+        <div class="settings">
+          <!-- <p @click="toggleSettings">Settings (gear symbol)</p>
+          <p @click="openLink">Photo by Unsplash</p>-->
+          <button type="button" class="btn btn-primary" @click="openModal">Small modal</button>
         </div>
       </div>
-      <!-- <button
-          @click="getNewPhoto"
-        >Get photo</button>
-        <button @click="savePhoto">Save photo</button>
-        <button type="button" data-toggle="modal" data-target=".photoModal">Choose Photo</button>
-        <p @click="openLink">Photo by Unsplash</p>
-        <button @click="getQuote">Get Quote</button>
-        <button @click="saveQuote">Save Quote</button>
-        <button @click="chooseMilitary">Set to Military</button>
-      <button @click="chooseStandard">Set to Standard</button>-->
-
       <div class="col-6 quote">
         <quote :bus="bus" />
       </div>
@@ -198,6 +233,10 @@ export default {
       } else {
         this.changeSettings = true;
       }
+    },
+    openModal() {
+      $("#modal").modal("show");
+      $(".modal-backdrop").remove();
     }
   },
   components: {
@@ -253,7 +292,7 @@ export default {
 .settings p {
   margin-bottom: 0;
 }
-.settings-card {
+/* .settings-card {
   color: white;
   background-color: grey;
   border: 2pt solid black;
@@ -266,10 +305,14 @@ export default {
 .settings-body {
   height: 300px;
   overflow-y: scroll;
+} */
+#modal {
+  top: 480px;
+  left: -440px;
 }
+
 .individual {
   display: flex;
-  justify-content: space-between;
-  margin: 2px 10px 2px 10px;
+  color: black;
 }
 </style>
