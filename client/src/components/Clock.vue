@@ -7,26 +7,26 @@
 
 <script>
 export default {
-  name: "Clock",
+  name: 'Clock',
   data() {
     return {
-      time: "",
-      militaryTime: "",
+      time: '',
+      militaryTime: '',
       userPreferences: {
-        name: "",
+        name: '',
         militaryTimeSelected: false,
-        setName: true
-      }
+        setName: true,
+      },
     };
   },
   mounted() {
     this.getTime();
-    this.bus.$on("change", this.changeTime);
+    this.bus.$on('change', this.changeTime);
   },
   computed: {
     User() {
       return this.$store.state.userPreferences;
-    }
+    },
   },
   methods: {
     getTime() {
@@ -36,31 +36,31 @@ export default {
 
       m = this.checkTime(m);
 
-      let time = h + ":" + m;
+      let time = h + ':' + m;
       this.militaryTime = time;
       if (this.$store.state.userPreferences.militaryTimeSelected == false) {
         h = this.checkTime(h);
-        let session = "AM";
+        let session = 'AM';
         if (h == 0) {
           h = 12;
         }
         if (h > 12) {
           h = h - 12;
-          session = "PM";
+          session = 'PM';
         }
-        let time = h + ":" + m + " " + session;
+        let time = h + ':' + m + ' ' + session;
         this.time = time;
       }
       setTimeout(this.getTime, 500);
     },
     checkTime(i) {
       if (i < 10) {
-        i = "0" + i;
+        i = '0' + i;
       } // add zero in front of numbers < 10
       return i;
     },
     async changeTime() {
-      console.log("parentTime", this.parentTime);
+      console.log('parentTime', this.parentTime);
       // debugger;
       if (this.parentTime == false) {
         this.userPreferences.militaryTimeSelected = false;
@@ -76,18 +76,19 @@ export default {
       let newUserTime = {
         name: this.$store.state.userPreferences.name,
         militaryTimeSelected: this.userPreferences.militaryTimeSelected,
-        setName: false
+        setName: false,
       };
-      await this.$store.dispatch("updateTime", newUserTime);
-      this.$store.dispatch("getUser");
-    }
+      await this.$store.dispatch('updateTime', newUserTime);
+      this.$store.dispatch('getUser');
+    },
   },
-  props: ["parentTime", "bus"]
+  props: ['parentTime', 'bus'],
 };
 </script>
 
 <style>
 .clock {
   font-size: 8rem;
+  color: white;
 }
 </style>

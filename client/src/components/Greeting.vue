@@ -18,20 +18,20 @@
 </template>
 
 <script>
-import VueInputAutoWidth from "vue-input-autowidth";
-import Vue from "vue";
+import VueInputAutoWidth from 'vue-input-autowidth';
+import Vue from 'vue';
 Vue.use(VueInputAutoWidth);
 export default {
-  name: "Greeting",
+  name: 'Greeting',
   data() {
     return {
-      timeOfDay: "evening",
+      timeOfDay: 'evening',
       // NOTE Don't forget to add the option to set time preference!!!
       userPreferences: {
-        name: "",
+        name: '',
         militaryTimeSelected: false,
-        setName: true
-      }
+        setName: true,
+      },
     };
   },
   mounted() {
@@ -41,15 +41,15 @@ export default {
   computed: {
     User() {
       return this.$store.state.userPreferences;
-    }
+    },
   },
   methods: {
     submit() {
       this.userPreferences.setName = false;
-      this.$store.dispatch("setUser", this.userPreferences);
+      this.$store.dispatch('setUser', this.userPreferences);
     },
     async checkUser() {
-      let result = await this.$store.dispatch("getUser");
+      let result = await this.$store.dispatch('getUser');
       if (Object.keys(result).length === 0) {
         this.userPreferences.setName = true;
       } else {
@@ -58,25 +58,26 @@ export default {
     },
     editName() {
       this.userPreferences.setName = true;
-      this.userPreferences.name = "";
+      this.userPreferences.name = '';
       this.$nextTick(() => this.$refs.focus.focus());
     },
     getTimeOfDay() {
       let h = new Date().getHours(); // 0 - 23
       if (h < 12) {
-        this.timeOfDay = "morning";
+        this.timeOfDay = 'morning';
       } else if (h > 12 && h < 17) {
-        this.timeOfDay = "afternoon";
+        this.timeOfDay = 'afternoon';
       }
       setTimeout(this.getTimeOfDay, 6000); //every minute (I don't know how this will effect app speed)
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .greeting {
   font-size: 3rem;
+  color: white;
 }
 input {
   border: none;
