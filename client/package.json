@@ -7,7 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "minimist": "^1.2.5",
     "node-fetch": "^2.6.0",
     "unsplash-js": "^6.0.0",
